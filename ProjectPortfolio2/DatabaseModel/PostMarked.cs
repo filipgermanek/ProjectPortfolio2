@@ -1,11 +1,10 @@
 ﻿using System;
-
-namespace ProjectPortfolio2
+namespace ProjectPortfolio2.DatabaseModel
 {
-    public class CommentMarked
+    public class PostMarked
     {
-        public int CommentId { get; set; }
+        public int PostId { get; set; }
         public int UserId { get; set; }
         public string AnnotationText { get; set; }
-    }
+}
 }
