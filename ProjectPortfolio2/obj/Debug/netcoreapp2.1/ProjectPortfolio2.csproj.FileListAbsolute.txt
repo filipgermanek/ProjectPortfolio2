@@ -1,0 +1,4 @@
+/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.csprojAssemblyReference.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.csproj.CoreCompileInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.AssemblyInfoInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.AssemblyInfo.cs
