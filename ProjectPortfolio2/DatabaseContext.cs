@@ -33,6 +33,20 @@ namespace ProjectPortfolio2
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+
+            // CommentMarked composite key.
+            modelBuilder.Entity<CommentMarked>()
+                        .HasKey(x => new { x.CommentId, x.UserId });
+            // PostLink composite key.
+            modelBuilder.Entity<PostLink>()
+                        .HasKey(x => new { x.LinkId, x.PostId });
+            // PostMarked composite key.
+            modelBuilder.Entity<PostMarked>()
+                        .HasKey(x => new { x.PostId, x.UserId });
+            // PostTag composite key.
+            modelBuilder.Entity<PostTag>()
+                        .HasKey(x => new { x.PostId, x.TagId });
+
         }
 
         // you only need this if you want to see the SQL statments created

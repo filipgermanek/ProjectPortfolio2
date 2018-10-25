@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectPortfolio2
 {
@@ -6,8 +8,19 @@ namespace ProjectPortfolio2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            //ehjhejhjeh
+            var owners = GetOwners();
+            foreach(var o in owners)
+            {
+                Console.WriteLine("owner name: " + o.DisplayName);
+            }
+        }
+
+        private static List<Owner> GetOwners()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return (from o in db.Owners select o).ToList();
+            }
         }
     }
 }
