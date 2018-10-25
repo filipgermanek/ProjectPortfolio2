@@ -9,18 +9,40 @@ namespace ProjectPortfolio2
     {
         static void Main(string[] args)
         {
-            var tags = GetTags();
-            foreach(var o in tags)
+
+            /*
+            var owners = GetOwners();
+            foreach(var o in owners)
             {
                 Console.WriteLine("tag name: " + o.Name);
             }
+            */
+
+
+            var comments = GetCommments();
+            foreach(var c in comments)
+            {
+                Console.WriteLine("comment id: " + c.Id + "comment: " + c.Text);
+            }
+
         }
 
-        static List<Tag> GetTags()
+
+
+        private static List<Owner> GetOwners()
         {
             using (var db = new DatabaseContext())
             {
                 return (from t in db.Tags select t).ToList();
+            }
+        }
+
+
+        private static List<Comment> GetCommments()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return (from c in db.Comments select c).ToList();
             }
         }
     }

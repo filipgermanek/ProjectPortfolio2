@@ -23,7 +23,7 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
+            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
@@ -33,9 +33,12 @@ namespace ProjectPortfolio2
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentMarkedConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
             modelBuilder.ApplyConfiguration(new SearchHistoryConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -81,6 +84,55 @@ namespace ProjectPortfolio2
             builder.Property(x => x.Age).HasColumnName("age");
         }
     }
+
+    //Comments Congif
+    class CommentConfiguration : IEntityTypeConfiguration<Comment>
+    {
+        public void Configure(EntityTypeBuilder<Comment> builder)
+        {
+            builder.ToTable("comment");
+            builder.Property(x => x.Id).HasColumnName("id");
+            builder.Property(x => x.Score).HasColumnName("score");
+            builder.Property(x => x.Text).HasColumnName("text");
+            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.OwnerId).HasColumnName("owner_id");
+        }
+    }
+
+    //Comments Marked Config
+    class CommentMarkedConfiguration : IEntityTypeConfiguration<CommentMarked>
+    {
+        public void Configure(EntityTypeBuilder<CommentMarked> builder)
+        {
+            builder.ToTable("comment_marked");
+            builder.Property(x => x.CommentId).HasColumnName("comment_id");
+            builder.Property(x => x.UserId).HasColumnName("user_id");
+            builder.Property(x => x.AnnotationText).HasColumnName("annotation_text");
+        }
+    }
+
+    class PostLinkConfiguration : IEntityTypeConfiguration<PostLink>
+    {
+        public void Configure(EntityTypeBuilder<PostLink> builder)
+        {
+            builder.ToTable("post_link");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.LinkId).HasColumnName("link_id");
+        }
+    }
+
+    class PostMarkedConfiguration : IEntityTypeConfiguration<PostMarked>
+    {
+        public void Configure(EntityTypeBuilder<PostMarked> builder)
+        {
+            builder.ToTable("post_marked");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.UserId).HasColumnName("user_id");
+            builder.Property(x => x.AnnotationText).HasColumnName("annotation_text");
+        }
+    }
+
 
     //SEARCH HISTORY CONFIG
     class SearchHistoryConfiguration : IEntityTypeConfiguration<SearchHistory>
