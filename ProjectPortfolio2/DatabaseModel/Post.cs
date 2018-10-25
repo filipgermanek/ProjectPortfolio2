@@ -8,9 +8,7 @@ namespace ProjectPortfolio2
         public int? Score { get; set; }
         public string Body{ get; set; }
         public DateTime? CreationDate { get; set; }
-        public DateTime? ClosedDate { get; set; }
         public string Title { get; set; }
-        public bool Accepted { get; set; }
         public int OwnerId { get; set; }
     }
 }
