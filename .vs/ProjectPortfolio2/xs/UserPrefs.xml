@@ -6,6 +6,7 @@
       <File FileName="ProjectPortfolio2/DatabaseModel/Owner.cs" Line="1" Column="1" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Answer.cs" Line="1" Column="1" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/Program.cs" Line="4" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
