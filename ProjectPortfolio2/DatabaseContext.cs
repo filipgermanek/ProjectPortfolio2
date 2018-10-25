@@ -33,6 +33,9 @@ namespace ProjectPortfolio2
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new SearchHistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -46,6 +49,11 @@ namespace ProjectPortfolio2
             // PostTag composite key.
             modelBuilder.Entity<PostTag>()
                         .HasKey(x => new { x.PostId, x.TagId });
+
+            //modelBuilder.Entity<Post>()
+                        //.HasDiscriminator<int?>("parent_id")
+                        //.HasValue<Question>(null)
+                        //.HasValue<Answer>();
 
         }
 
@@ -71,6 +79,45 @@ namespace ProjectPortfolio2
             builder.Property(x => x.Location).HasColumnName("location");
             builder.Property(x => x.CreationDate).HasColumnName("creation_date");
             builder.Property(x => x.Age).HasColumnName("age");
+        }
+    }
+
+    //SEARCH HISTORY CONFIG
+    class SearchHistoryConfiguration : IEntityTypeConfiguration<SearchHistory>
+    {
+        public void Configure(EntityTypeBuilder<SearchHistory> builder)
+        {
+            builder.ToTable("search_history");
+            builder.Property(x => x.Id).HasColumnName("id");
+            builder.Property(x => x.UserId).HasColumnName("user_id");
+            builder.Property(x => x.Searchtext).HasColumnName("search_text");
+            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
+        }
+    }
+
+    //TAG CONFIG
+    class TagConfiguration : IEntityTypeConfiguration<Tag>
+    {
+        public void Configure(EntityTypeBuilder<Tag> builder)
+        {
+            builder.ToTable("tag");
+            builder.Property(x => x.Id).HasColumnName("id");
+            builder.Property(x => x.Name).HasColumnName("name");
+        }
+    }
+
+    //USER CONFIGURATION
+    class UserConfiguration : IEntityTypeConfiguration<User>
+    {
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+            builder.ToTable("user");
+            builder.Property(x => x.Id).HasColumnName("id");
+            builder.Property(x => x.Email).HasColumnName("email");
+            builder.Property(x => x.Password).HasColumnName("password");
+            builder.Property(x => x.Name).HasColumnName("name");
+            builder.Property(x => x.Location).HasColumnName("location");
+            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
         }
     }
 }

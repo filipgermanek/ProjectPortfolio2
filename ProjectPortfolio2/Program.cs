@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ProjectPortfolio2.DatabaseModel;
 
 namespace ProjectPortfolio2
 {
@@ -8,18 +9,18 @@ namespace ProjectPortfolio2
     {
         static void Main(string[] args)
         {
-            var owners = GetOwners();
-            foreach(var o in owners)
+            var tags = GetTags();
+            foreach(var o in tags)
             {
-                Console.WriteLine("owner name: " + o.DisplayName);
+                Console.WriteLine("tag name: " + o.Name);
             }
         }
 
-        private static List<Owner> GetOwners()
+        static List<Tag> GetTags()
         {
             using (var db = new DatabaseContext())
             {
-                return (from o in db.Owners select o).ToList();
+                return (from t in db.Tags select t).ToList();
             }
         }
     }
