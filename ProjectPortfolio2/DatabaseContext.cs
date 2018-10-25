@@ -46,7 +46,7 @@ namespace ProjectPortfolio2
             });
     }
 
-    //CATEGORY CONFIG
+    //OWNER CONFIG
     class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         public void Configure(EntityTypeBuilder<Owner> builder)
