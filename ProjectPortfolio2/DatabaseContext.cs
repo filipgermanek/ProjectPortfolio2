@@ -32,11 +32,15 @@ namespace ProjectPortfolio2
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfiguration(new OwnerConfiguration());
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new CommentMarkedConfiguration());
-            modelBuilder.ApplyConfiguration(new TagConfiguration());
+            modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new PostLinkConfiguration());
+            modelBuilder.ApplyConfiguration(new PostMarkedConfiguration());
+            modelBuilder.ApplyConfiguration(new PostTagConfiguration());
             modelBuilder.ApplyConfiguration(new SearchHistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new TagConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
 
@@ -85,6 +89,7 @@ namespace ProjectPortfolio2
             builder.Property(x => x.OwnerId).HasColumnName("owner_id");
         }
     }
+
     //Comments Marked Config
     class CommentMarkedConfiguration : IEntityTypeConfiguration<CommentMarked>
     {
@@ -96,6 +101,7 @@ namespace ProjectPortfolio2
             builder.Property(x => x.AnnotationText).HasColumnName("annotation_text");
         }
     }
+
     //OWNER CONFIG
     class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
@@ -110,8 +116,20 @@ namespace ProjectPortfolio2
         }
     }
     //ADD POST HERE
+    class PostConfiguration : IEntityTypeConfiguration<Post>
+    {
+        public void Configure(EntityTypeBuilder<Post> builder)
+        {
+            builder.ToTable("post");
+            builder.Property(x => x.Id).HasColumnName("id");
+            builder.Property(x => x.Score).HasColumnName("score");
+            builder.Property(x => x.Body).HasColumnName("body");
+            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
+            builder.Property(x => x.Title).HasColumnName("title");
+            builder.Property(x => x.OwnerId).HasColumnName("owner_id");
+        }
+    }
 
-   
     //POST LINK CONFIG
     class PostLinkConfiguration : IEntityTypeConfiguration<PostLink>
     {
@@ -122,6 +140,20 @@ namespace ProjectPortfolio2
             builder.Property(x => x.LinkId).HasColumnName("link_id");
         }
     }
+
+    //POST LINK CONFIG
+    class PostTagConfiguration : IEntityTypeConfiguration<PostTag>
+    {
+        public void Configure(EntityTypeBuilder<PostTag> builder)
+        {
+            builder.ToTable("post_tag");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.TagId).HasColumnName("tag_id");
+        }
+    }
+
+
+
     //POST MARKED CONFIG
     class PostMarkedConfiguration : IEntityTypeConfiguration<PostMarked>
     {
