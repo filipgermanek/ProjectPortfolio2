@@ -1,7 +1,8 @@
 ﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/Owner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Documents/Visual Studio Projects/Assignment4-master(part1only)/EfEx1/NorthwindContex.cs">
     <Files>
-      <File FileName="ProjectPortfolio2/DatabaseModel/Owner.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="9" Column="6" />
+      <File FileName="../../Documents/Visual Studio Projects/Assignment4-master(part1only)/EfEx1/NorthwindContex.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
