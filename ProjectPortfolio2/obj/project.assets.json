@@ -3089,28 +3089,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/nicolaielhojnielsen/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\soniy\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
+      "projectUniqueName": "C:\\Users\\soniy\\source\\repos\\filipgermanek\\ProjectPortfolio2\\ProjectPortfolio2\\ProjectPortfolio2.csproj",
       "projectName": "ProjectPortfolio2",
-      "projectPath": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
-      "packagesPath": "/Users/nicolaielhojnielsen/.nuget/packages/",
-      "outputPath": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj",
+      "projectPath": "C:\\Users\\soniy\\source\\repos\\filipgermanek\\ProjectPortfolio2\\ProjectPortfolio2\\ProjectPortfolio2.csproj",
+      "packagesPath": "C:\\Users\\soniy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\soniy\\source\\repos\\filipgermanek\\ProjectPortfolio2\\ProjectPortfolio2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/nicolaielhojnielsen/.config/NuGet/NuGet.Config"
+        "C:\\Users\\soniy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3127,15 +3129,14 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "Microsoft.NETCore.App": {
+            "target": "Package",
+            "version": "[2.1.0, )",
+            "autoReferenced": true
+          },
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
-            "version": "2.1.2"
-          },
-          "Microsoft.NETCore.App": {
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "2.1",
-            "autoReferenced": true
+            "version": "[2.1.2, )"
           }
         },
         "imports": [
