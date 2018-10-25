@@ -23,7 +23,7 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
+            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
@@ -33,6 +33,7 @@ namespace ProjectPortfolio2
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -61,6 +62,7 @@ namespace ProjectPortfolio2
     }
 
     //OWNER CONFIG
+    
     class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         public void Configure(EntityTypeBuilder<Owner> builder)
@@ -73,4 +75,38 @@ namespace ProjectPortfolio2
             builder.Property(x => x.Age).HasColumnName("age");
         }
     }
+    
+    //POST CONFIG
+    class PostConfiguration: IEntityTypeConfiguration<Post>
+    {
+        public void Configure(EntityTypeBuilder<Post> builder)
+        {
+            builder.ToTable("post");
+            builder.Property(x => x.PostId).HasColumnName("id");
+            builder.Property(x => x.Score).HasColumnName("score");
+            builder.Property(x => x.Body).HasColumnName("body");
+            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
+            builder.Property(x => x.ClosedDate).HasColumnName("closed_date");
+            builder.Property(x => x.Title).HasColumnName("title");
+            builder.Property(x => x.ParentId).HasColumnName("parent_id");
+            builder.Property(x => x.Accepted).HasColumnName("accepted");
+            builder.Property(x => x.OwnerId).HasColumnName("owner_id");
+
+        }
+
+        public void Configure(EntityTypeBuilder<PostTag> builder)
+        {
+            builder.ToTable("posttag");
+            builder.Property(x => x.PostId).HasColumnName("id");
+            builder.Property(x => x.TagId).HasColumnName("tagid");
+
+
+        }
+
+
+
+    }
+
+    
+
 }
