@@ -33,7 +33,9 @@ namespace ProjectPortfolio2
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
-            modelBuilder.ApplyConfiguration(new PostConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentConfiguration());
+            modelBuilder.ApplyConfiguration(new CommentMarkedConfiguration());
+
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -62,7 +64,6 @@ namespace ProjectPortfolio2
     }
 
     //OWNER CONFIG
-    
     class OwnerConfiguration : IEntityTypeConfiguration<Owner>
     {
         public void Configure(EntityTypeBuilder<Owner> builder)
@@ -75,38 +76,53 @@ namespace ProjectPortfolio2
             builder.Property(x => x.Age).HasColumnName("age");
         }
     }
-    
-    //POST CONFIG
-    class PostConfiguration: IEntityTypeConfiguration<Post>
+
+    //Comments Congif
+    class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
-        public void Configure(EntityTypeBuilder<Post> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable("post");
-            builder.Property(x => x.PostId).HasColumnName("id");
+            builder.ToTable("comment");
+            builder.Property(x => x.Id).HasColumnName("id");
             builder.Property(x => x.Score).HasColumnName("score");
-            builder.Property(x => x.Body).HasColumnName("body");
+            builder.Property(x => x.Text).HasColumnName("text");
             builder.Property(x => x.CreationDate).HasColumnName("creation_date");
-            builder.Property(x => x.ClosedDate).HasColumnName("closed_date");
-            builder.Property(x => x.Title).HasColumnName("title");
-            builder.Property(x => x.ParentId).HasColumnName("parent_id");
-            builder.Property(x => x.Accepted).HasColumnName("accepted");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
             builder.Property(x => x.OwnerId).HasColumnName("owner_id");
-
         }
-
-        public void Configure(EntityTypeBuilder<PostTag> builder)
-        {
-            builder.ToTable("posttag");
-            builder.Property(x => x.PostId).HasColumnName("id");
-            builder.Property(x => x.TagId).HasColumnName("tagid");
-
-
-        }
-
-
-
     }
 
-    
+    //Comments Marked Config
+    class CommentMarkedConfiguration : IEntityTypeConfiguration<CommentMarked>
+    {
+        public void Configure(EntityTypeBuilder<CommentMarked> builder)
+        {
+            builder.ToTable("comment_marked");
+            builder.Property(x => x.CommentId).HasColumnName("comment_id");
+            builder.Property(x => x.UserId).HasColumnName("user_id");
+            builder.Property(x => x.AnnotationText).HasColumnName("annotation_text");
+        }
+    }
+
+    class PostLinkConfiguration : IEntityTypeConfiguration<PostLink>
+    {
+        public void Configure(EntityTypeBuilder<PostLink> builder)
+        {
+            builder.ToTable("post_link");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.LinkId).HasColumnName("link_id");
+        }
+    }
+
+    class PostMarkedConfiguration : IEntityTypeConfiguration<PostMarked>
+    {
+        public void Configure(EntityTypeBuilder<PostMarked> builder)
+        {
+            builder.ToTable("post_marked");
+            builder.Property(x => x.PostId).HasColumnName("post_id");
+            builder.Property(x => x.UserId).HasColumnName("user_id");
+            builder.Property(x => x.AnnotationText).HasColumnName("annotation_text");
+        }
+    }
 
 }
