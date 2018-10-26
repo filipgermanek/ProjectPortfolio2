@@ -1,0 +1,14 @@
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.deps.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.runtimeconfig.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.runtimeconfig.dev.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.pdb
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csprojAssemblyReference.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csproj.CoreCompileInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorAssemblyInfo.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorAssemblyInfo.cs
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.AssemblyInfoInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.AssemblyInfo.cs
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorTargetAssemblyInfo.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.pdb
