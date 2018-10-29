@@ -8,6 +8,8 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
+        Comment GetComment(int id);
+        List<Comment> GetComments();
     }
     public class DataService : IDataService
     {
@@ -27,5 +29,44 @@ namespace ProjectPortfolio2.DatabaseModel
                 return db.Owners.Find(id);
             }
         }
+
+        public List<Comment> GetComments()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Comments.Take(5).ToList();
+            }
+        }
+
+        public Comment GetComment(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Comments.Find(id);
+            }
+
+        }
+        /*
+        public List<CommentMarked> GetCommentsMarked(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.CommentsMarked.Take(5).ToList();
+        
+            }
+        }
+        public CommentMarked GetCommentMarked(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.CommentsMarked.Find(id);
+            }
+        }
+
+    */
+
+
+
+
     }
 }
