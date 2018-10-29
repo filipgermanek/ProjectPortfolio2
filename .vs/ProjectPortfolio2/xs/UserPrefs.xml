@@ -1,9 +1,18 @@
 ﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Models/PostListModel.cs">
     <Files>
       <File FileName="WebService/Models/PostListModel.cs" Line="1" Column="1" />
       <File FileName="WebService/Models/PostModel.cs" Line="1" Column="1" />
       <File FileName="WebService/Controllers/PostsController.cs" Line="1" Column="1" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Controllers/UsersController.cs">
+    <Files>
+      <File FileName="WebService/Startup.cs" Line="20" Column="10" />
+      <File FileName="WebService/Models/UserModel.cs" Line="13" Column="70" />
+      <File FileName="WebService/Controllers/UsersController.cs" Line="67" Column="33" />
+      <File FileName="WebService/Models/SearchHistoryModel.cs" Line="4" Column="18" />
+>>>>>>> master
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
