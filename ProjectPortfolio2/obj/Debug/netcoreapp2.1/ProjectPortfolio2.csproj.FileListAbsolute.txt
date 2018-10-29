@@ -9,14 +9,13 @@
 /Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
 /Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.dll
 /Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
-/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.dll
-/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.deps.json
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.runtimeconfig.json
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.runtimeconfig.dev.json
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.dll
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/bin/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
-/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.csprojAssemblyReference.cache
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.csproj.CoreCompileInputs.cache
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.AssemblyInfoInputs.cache
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.AssemblyInfo.cs
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.dll
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.pdb

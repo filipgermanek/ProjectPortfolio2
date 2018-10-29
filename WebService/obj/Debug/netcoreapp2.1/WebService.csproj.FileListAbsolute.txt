@@ -15,3 +15,20 @@
 /Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/ProjectPortfolio2.dll
 /Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
 /Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csproj.CopyComplete
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.deps.json
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.runtimeconfig.json
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.runtimeconfig.dev.json
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.dll
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/WebService.pdb
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/ProjectPortfolio2.dll
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/bin/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csprojAssemblyReference.cache
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csproj.CoreCompileInputs.cache
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorAssemblyInfo.cache
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorAssemblyInfo.cs
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.AssemblyInfoInputs.cache
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.AssemblyInfo.cs
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.RazorTargetAssemblyInfo.cache
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.csproj.CopyComplete
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.dll
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj/Debug/netcoreapp2.1/WebService.pdb
