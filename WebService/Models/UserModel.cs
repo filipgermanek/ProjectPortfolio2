@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProjectPortfolio2.DatabaseModel
+namespace WebService.Models
 {
-    public class User
+    public class UserModel
     {
-        public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string Location { get; set; }
         public DateTime CreationDate { get; set; }
+        public List<SearchHistoryModel> SearchHistoryList {get; set;}
     }
 }

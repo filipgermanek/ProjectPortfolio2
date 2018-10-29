@@ -36,7 +36,7 @@ namespace WebService.Controllers
             return Ok(model);
         }
 
-        private OwnerModel CreateOwnerModel(Owner owner)
+        OwnerModel CreateOwnerModel(Owner owner)
         {
             var model = new OwnerModel
             {
