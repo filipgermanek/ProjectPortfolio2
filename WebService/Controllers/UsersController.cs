@@ -57,6 +57,18 @@ namespace WebService.Controllers
                 Location = user.Location,
                 CreationDate = user.CreationDate,
             };
+            var userSearchHistory = _dataService.GetUserSearchHistory(user.Id).Select(CreateSearchHistoryModel);
+            model.SearchHistoryList = userSearchHistory.ToList();
+            return model;
+        }
+
+        SearchHistoryModel CreateSearchHistoryModel(SearchHistory searchHistory)
+        {
+            var model = new SearchHistoryModel
+            {
+                Searchtext = searchHistory.Searchtext,
+                CreationDate = searchHistory.CreationDate
+            };
             return model;
         }
     }
