@@ -4,6 +4,7 @@ using ProjectPortfolio2.DatabaseModel;
 using System;
 using System.Linq;
 using WebService.Models;
+using System.Diagnostics.Contracts;
 
 namespace WebService.Controllers
 {
@@ -20,6 +21,7 @@ namespace WebService.Controllers
         [HttpGet(Name = nameof(GetComments))]
         public IActionResult GetComments()
         {
+            Contract.Ensures(Contract.Result<IActionResult>() != null);
             var comments = _dataService.GetComments().Select(CreateCommentModel);
             var result = new
             {
@@ -30,6 +32,7 @@ namespace WebService.Controllers
         [HttpGet("{id}", Name = nameof(GetComment))]
         public IActionResult GetComment(int id)
         {
+            Contract.Ensures(Contract.Result<IActionResult>() != null);
             var comment = _dataService.GetComment(id);
             if (comment== null) return NotFound();
             var model = CreateCommentModel(comment);

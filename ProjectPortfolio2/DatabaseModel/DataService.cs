@@ -8,7 +8,6 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-
         List<Post> GetPosts();
         Post GetPostById(int id);
         List<User> GetUsers();
