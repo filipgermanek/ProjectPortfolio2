@@ -1,11 +1,7 @@
 ﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Models/OwnerModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Startup.cs">
     <Files>
-      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="8" Column="6" />
-      <File FileName="WebService/Controllers/OwnersController.cs" Line="36" Column="30" />
-      <File FileName="WebService/Program.cs" Line="1" Column="1" />
-      <File FileName="WebService/Startup.cs" Line="30" Column="27" />
-      <File FileName="WebService/Models/OwnerModel.cs" Line="1" Column="1" />
+      <File FileName="WebService/Startup.cs" Line="19" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
