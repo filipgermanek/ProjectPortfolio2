@@ -8,6 +8,9 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
+
+        List<Post> GetPosts();
+        Post GetPostById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
@@ -30,6 +33,22 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 return db.Owners.Find(id);
+            }
+        }
+
+        public List<Post> GetPosts ()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Posts.Take(10).ToList();
+            }
+        }
+
+        public Post GetPostById(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Posts.Find(id);
             }
         }
 
