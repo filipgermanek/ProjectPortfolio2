@@ -7,7 +7,7 @@ using WebService.Models;
 
 namespace WebService.Controllers
 {
-    [Route("api/owners")]
+    [Route("api/comments")]
     [ApiController]
     public class CommentsController :Controller
     {
