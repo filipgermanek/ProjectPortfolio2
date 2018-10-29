@@ -27,6 +27,15 @@ namespace WebService.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}", Name = nameof(GetOwner))]
+        public IActionResult GetOwner(int id)
+        {
+            var owner = _dataService.GetOwner(id);
+            if (owner == null) return NotFound();
+            var model = CreateOwnerModel(owner);
+            return Ok(model);
+        }
+
         private OwnerModel CreateOwnerModel(Owner owner)
         {
             var model = new OwnerModel
