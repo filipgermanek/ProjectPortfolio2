@@ -1,6 +1,13 @@
-﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
-  <MonoDevelop.Ide.Workbench />
+﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseContext.cs">
+    <Files>
+      <File FileName="WebService/Controllers/OwnersController.cs" Line="21" Column="10" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="8" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="26" Column="44" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.WebService PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
