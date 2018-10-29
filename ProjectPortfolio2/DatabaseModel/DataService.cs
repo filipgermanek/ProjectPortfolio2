@@ -8,12 +8,13 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-
         List<Post> GetPosts();
         Post GetPostById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
+        Comment GetComment(int id);
+        List<Comment> GetComments();
     }
     public class DataService : IDataService
     {
@@ -73,5 +74,44 @@ namespace ProjectPortfolio2.DatabaseModel
                 return db.SearchHistories.Where(s => s.UserId.Equals(userId)).ToList();
             }
         }
+
+        public List<Comment> GetComments()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Comments.Take(5).ToList();
+            }
+        }
+
+        public Comment GetComment(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Comments.Find(id);
+            }
+
+        }
+        /*
+        public List<CommentMarked> GetCommentsMarked(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.CommentsMarked.Take(5).ToList();
+        
+            }
+        }
+        public CommentMarked GetCommentMarked(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.CommentsMarked.Find(id);
+            }
+        }
+
+    */
+
+
+
+
     }
 }
