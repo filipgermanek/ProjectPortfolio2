@@ -10,5 +10,7 @@ namespace ProjectPortfolio2
         public DateTime? CreationDate { get; set; }
         public string Title { get; set; }
         public int OwnerId { get; set; }
+        public int Type { get; set; }
+        public DateTime? ClosedDate { get; set; }
     }
 }

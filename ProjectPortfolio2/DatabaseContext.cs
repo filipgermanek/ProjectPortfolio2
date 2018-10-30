@@ -19,6 +19,7 @@ namespace ProjectPortfolio2
         public DbSet<SearchHistory> SearchHistories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,8 +42,7 @@ namespace ProjectPortfolio2
             modelBuilder.ApplyConfiguration(new PostTagConfiguration());
             modelBuilder.ApplyConfiguration(new SearchHistoryConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-
+            modelBuilder.ApplyConfiguration(new UserConfiguration());   
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -56,12 +56,11 @@ namespace ProjectPortfolio2
             // PostTag composite key.
             modelBuilder.Entity<PostTag>()
                         .HasKey(x => new { x.PostId, x.TagId });
-
-            //modelBuilder.Entity<Post>()
-                        //.HasDiscriminator<int?>("parent_id")
-                        //.HasValue<Question>(null)
-                        //.HasValue<Answer>();
-
+                        
+            modelBuilder.Entity<Post>()
+                        .HasDiscriminator<int>("type")                     
+                        .HasValue<Post>(1)
+                        .HasValue<Answer>(2);
         }
 
         // you only need this if you want to see the SQL statments created
@@ -127,6 +126,8 @@ namespace ProjectPortfolio2
             builder.Property(x => x.CreationDate).HasColumnName("creation_date");
             builder.Property(x => x.Title).HasColumnName("title");
             builder.Property(x => x.OwnerId).HasColumnName("owner_id");
+            builder.Property(x => x.ClosedDate).HasColumnName("closed_date");
+            builder.Property(x => x.Type).HasColumnName("type");
         }
     }
 
