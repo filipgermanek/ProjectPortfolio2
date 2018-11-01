@@ -12,13 +12,15 @@ namespace ProjectPortfolio2
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Comment> Comments {get; set; }
         public DbSet<CommentMarked> CommentsMarked {get; set; }
-        public DbSet<Post> Posts {get; set; }
+       // public DbSet<Post> Posts {get; set; }
         public DbSet<PostLink> PostLinks { get; set; }
         public DbSet<PostMarked> PostsMarked { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
         public DbSet<SearchHistory> SearchHistories { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Question> Questions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -35,14 +37,12 @@ namespace ProjectPortfolio2
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new CommentMarkedConfiguration());
             modelBuilder.ApplyConfiguration(new OwnerConfiguration());
-            modelBuilder.ApplyConfiguration(new PostConfiguration());
             modelBuilder.ApplyConfiguration(new PostLinkConfiguration());
             modelBuilder.ApplyConfiguration(new PostMarkedConfiguration());
             modelBuilder.ApplyConfiguration(new PostTagConfiguration());
             modelBuilder.ApplyConfiguration(new SearchHistoryConfiguration());
             modelBuilder.ApplyConfiguration(new TagConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-
+            modelBuilder.ApplyConfiguration(new UserConfiguration()); 
 
             // CommentMarked composite key.
             modelBuilder.Entity<CommentMarked>()
@@ -57,11 +57,22 @@ namespace ProjectPortfolio2
             modelBuilder.Entity<PostTag>()
                         .HasKey(x => new { x.PostId, x.TagId });
 
-            //modelBuilder.Entity<Post>()
-                        //.HasDiscriminator<int?>("parent_id")
-                        //.HasValue<Question>(null)
-                        //.HasValue<Answer>();
+            modelBuilder.Entity<Post>().ToTable("post");
+            modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Entity<Post>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Entity<Post>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Entity<Post>().Property(x => x.CreationDate).HasColumnName("creation_date");
+            modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Entity<Post>().Property(x => x.OwnerId).HasColumnName("owner_id");
+            modelBuilder.Entity<Post>().Property(x => x.Type).HasColumnName("type");
+            modelBuilder.Entity<Post>().HasDiscriminator(x => x.Type)
+                        .HasValue<Question>(1)
+                        .HasValue<Answer>(2);
 
+            modelBuilder.Entity<Question>().Property(x => x.ClosedDate).HasColumnName("closed_date");
+
+            modelBuilder.Entity<Answer>().Property(x => x.ParentId).HasColumnName("parent_id");
+            modelBuilder.Entity<Answer>().Property(x => x.Accepted).HasColumnName("accepted");
         }
 
         // you only need this if you want to see the SQL statments created
@@ -115,20 +126,6 @@ namespace ProjectPortfolio2
             builder.Property(x => x.Age).HasColumnName("age");
         }
     }
-    //ADD POST HERE
-    class PostConfiguration : IEntityTypeConfiguration<Post>
-    {
-        public void Configure(EntityTypeBuilder<Post> builder)
-        {
-            builder.ToTable("post");
-            builder.Property(x => x.Id).HasColumnName("id");
-            builder.Property(x => x.Score).HasColumnName("score");
-            builder.Property(x => x.Body).HasColumnName("body");
-            builder.Property(x => x.CreationDate).HasColumnName("creation_date");
-            builder.Property(x => x.Title).HasColumnName("title");
-            builder.Property(x => x.OwnerId).HasColumnName("owner_id");
-        }
-    }
 
     //POST LINK CONFIG
     class PostLinkConfiguration : IEntityTypeConfiguration<PostLink>
@@ -151,8 +148,6 @@ namespace ProjectPortfolio2
             builder.Property(x => x.TagId).HasColumnName("tag_id");
         }
     }
-
-
 
     //POST MARKED CONFIG
     class PostMarkedConfiguration : IEntityTypeConfiguration<PostMarked>

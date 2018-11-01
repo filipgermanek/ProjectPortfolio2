@@ -36,6 +36,16 @@ namespace WebService.Controllers
             return Ok(model);
         }
 
+        [HttpPost(Name = nameof(CreateUser))]
+        public IActionResult CreateUser(UserModel userRequest)
+        {
+            var user = _dataService.CreateUser(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Location);
+            // maybe someting else needs to be returned is user is null, also handle errors and validation like email already used etc.
+            if (user == null) return NotFound();
+            var model = CreateUserModel(user);
+            return Ok(model);
+        }
+
         UserListModel CreateUserListModel(User user)
         {
             var model = new UserListModel

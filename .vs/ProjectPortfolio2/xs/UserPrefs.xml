@@ -1,18 +1,21 @@
-﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseContext.cs">
+﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/PostMarked.cs">
     <Files>
-      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="18" Column="37" />
-      <File FileName="WebService/Controllers/CommentsController.cs" Line="20" Column="22" />
-      <File FileName="WebService/Controllers/PostsController.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="69" Column="47" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="64" Column="14" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Question.cs" Line="8" Column="2" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="14" Column="41" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Answer.cs" Line="8" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/User.cs" Line="15" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Tag.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Owner.cs" Line="14" Column="54" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/PostMarked.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.WebService PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/Controllers/CommentsController.cs" relfile="WebService/Controllers/CommentsController.cs" line="23" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
