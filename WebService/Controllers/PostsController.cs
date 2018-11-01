@@ -46,10 +46,10 @@ namespace WebService.Controllers
         {
             var model = new PostModel
             {
+                Title = post.Title,
                 Score = post.Score,
                 Body = post.Body,
-                CreationDate = post.CreationDate,
-                Title = post.Title
+                CreationDate = post.CreationDate
             };
             return model;
         }
@@ -63,7 +63,6 @@ namespace WebService.Controllers
                 CreationDate = post.CreationDate,
             };
             model.Url = Url.Link(nameof(GetPostById), new { id = post.Id });
-          
             return model;
         }
 
