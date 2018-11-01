@@ -1,17 +1,12 @@
 ﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Models/CommentListModel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Models/CommentModel.cs">
     <Files>
-      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Question.cs" Line="8" Column="2" />
+      <File FileName="WebService/Models/CommentModel.cs" Line="12" Column="41" />
+      <File FileName="WebService/Models/CommentListModel.cs" Line="7" Column="28" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="69" Column="47" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Answer.cs" Line="8" Column="6" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/User.cs" Line="8" Column="31" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Tag.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Owner.cs" Line="1" Column="1" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/PostMarked.cs" Line="1" Column="1" />
-      <File FileName="WebService/Models/CommentModel.cs" Line="1" Column="1" />
-      <File FileName="WebService/Models/CommentListModel.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="11" Column="32" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Comment.cs" Line="12" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
