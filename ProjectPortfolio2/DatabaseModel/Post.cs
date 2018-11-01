@@ -2,7 +2,7 @@
 
 namespace ProjectPortfolio2
 {
-    public class Post
+    public abstract class Post
     {
         public int Id { get; set; }
         public int? Score { get; set; }
@@ -11,6 +11,5 @@ namespace ProjectPortfolio2
         public string Title { get; set; }
         public int OwnerId { get; set; }
         public int Type { get; set; }
-        public DateTime? ClosedDate { get; set; }
     }
 }

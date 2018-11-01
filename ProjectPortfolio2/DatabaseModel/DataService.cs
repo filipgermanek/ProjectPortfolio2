@@ -9,8 +9,8 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-        List<Post> GetPosts();
-        Post GetPostById(int id);
+        List<Question> GetPosts();
+        Question GetPostById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
@@ -22,8 +22,6 @@ namespace ProjectPortfolio2.DatabaseModel
     }
     public class DataService : IDataService
     {
-        public static string ConnectionString =
-            "host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123";
 
         public List<Owner> GetOwners()
         {
@@ -58,19 +56,19 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Post> GetPosts ()
+        public List<Question> GetPosts()
         {
             using (var db = new DatabaseContext())
             {
-                return db.Posts.Take(10).ToList();
+                return db.Questions.Take(10).ToList();
             }
         }
 
-        public Post GetPostById(int id)
+        public Question GetPostById(int id)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Posts.Find(id);
+                return db.Questions.Find(id);
             }
         }
 
@@ -114,6 +112,9 @@ namespace ProjectPortfolio2.DatabaseModel
             }
 
         }
+
+        public static string ConnectionString =
+            "host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123";
 
         public User CreateUser(string email, string password, string name, string location)
         {

@@ -1,12 +1,10 @@
-﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseContext.cs">
+﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/Answer.cs">
     <Files>
-      <File FileName="WebService/Controllers/UsersController.cs" Line="40" Column="46" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="13" Column="34" />
-      <File FileName="WebService/Models/UserModel.cs" Line="6" Column="18" />
-      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="59" Column="25" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="14" Column="50" />
-      <File FileName="WebService/Controllers/PostsController.cs" Line="29" Column="10" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="10" Column="18" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="64" Column="14" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Question.cs" Line="8" Column="2" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="6" Column="6" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Answer.cs" Line="8" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
