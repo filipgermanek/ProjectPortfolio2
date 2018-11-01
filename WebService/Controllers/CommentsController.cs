@@ -22,7 +22,7 @@ namespace WebService.Controllers
         public IActionResult GetComments()
         {
             Contract.Ensures(Contract.Result<IActionResult>() != null);
-            var comments = _dataService.GetComments().Select(CreateCommentModel);
+            var comments = _dataService.GetComments().Select(CreateCommentListModel);
             var result = new
             {
                 Items = comments
@@ -43,11 +43,25 @@ namespace WebService.Controllers
         {
             var model = new CommentModel
             {
-               Score = comment.Score,
-               Text = comment.Text,
-               CreationDate = comment.CreationDate
+                //Id = comment.Id,
+                Score = comment.Score,
+                Text = comment.Text,
+                CreationDate = comment.CreationDate
+                                     
 
             };
+            return model;
+        }
+
+        private CommentListModel CreateCommentListModel(Comment comment)
+        {
+            var model = new CommentListModel
+            {
+                Score = comment.Score,
+                Text = comment.Text,
+                //CreationDate = comment.CreationDate
+            };
+            model.Url = Url.Link(nameof(GetComment), new { id = comment.Id });
             return model;
         }
 

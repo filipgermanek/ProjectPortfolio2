@@ -19,3 +19,4 @@
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.AssemblyInfo.cs
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.dll
 /Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
+/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/obj/Debug/netcoreapp2.1/ProjectPortfolio2.csprojAssemblyReference.cache

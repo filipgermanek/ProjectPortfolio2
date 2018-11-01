@@ -3168,13 +3168,13 @@
     ]
   },
   "packageFolders": {
-    "/Users/filipgermanek/.nuget/packages/": {},
+    "/Users/nicolaielhojnielsen/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
+      "projectUniqueName": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
       "projectName": "ProjectPortfolio2",
       "projectPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
       "packagesPath": "/Users/filipgermanek/.nuget/packages/",
