@@ -1,11 +1,15 @@
 ﻿<Properties StartupConfiguration="{DDB7C8B2-BF82-4922-B777-A625D4950D27}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/Answer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/PostMarked.cs">
     <Files>
-      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="10" Column="18" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="69" Column="47" />
       <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="64" Column="14" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Question.cs" Line="8" Column="2" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="6" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="14" Column="41" />
       <File FileName="ProjectPortfolio2/DatabaseModel/Answer.cs" Line="8" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/User.cs" Line="15" Column="6" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Tag.cs" Line="1" Column="1" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Owner.cs" Line="14" Column="54" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/PostMarked.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

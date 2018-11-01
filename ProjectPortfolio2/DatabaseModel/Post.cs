@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProjectPortfolio2.DatabaseModel;
 
 namespace ProjectPortfolio2
 {
@@ -11,5 +13,7 @@ namespace ProjectPortfolio2
         public string Title { get; set; }
         public int OwnerId { get; set; }
         public int Type { get; set; }
+        public List<Tag> Tags { get; set;}
+        public List<Comment> Comments { get; set; }
     }
 }

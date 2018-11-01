@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using ProjectPortfolio2.DatabaseModel;
 
 namespace ProjectPortfolio2
 {
@@ -9,5 +11,6 @@ namespace ProjectPortfolio2
         public string Location { get; set; }
         public DateTime? CreationDate { get; set; }
         public int? Age { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }
