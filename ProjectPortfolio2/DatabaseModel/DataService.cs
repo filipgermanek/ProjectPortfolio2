@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Npgsql;
 
 namespace ProjectPortfolio2.DatabaseModel
 {
@@ -8,16 +9,20 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-        List<Post> GetPosts();
-        Post GetPostById(int id);
+        List<Question> GetPosts();
+        Question GetPostById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
         Comment GetComment(int id);
         List<Comment> GetComments();
+        List<Answer> GetAnswersByParentId(int parentId);
+        Answer GetAnswer(int id);
+        User CreateUser(string email, string password, string name, string location);
     }
     public class DataService : IDataService
     {
+
         public List<Owner> GetOwners()
         {
             using (var db = new DatabaseContext())
@@ -35,19 +40,35 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Post> GetPosts ()
+        public List<Answer> GetAnswersByParentId(int parentId)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Posts.Take(10).ToList();
+                return db.Answers.Where(x => x.ParentId.Equals(parentId)).ToList();
             }
         }
 
-        public Post GetPostById(int id)
+        public Answer GetAnswer(int id)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Posts.Find(id);
+                return db.Answers.Find(id);
+            }
+        }
+
+        public List<Question> GetPosts()
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Questions.Take(10).ToList();
+            }
+        }
+
+        public Question GetPostById(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Questions.Find(id);
             }
         }
 
@@ -91,6 +112,46 @@ namespace ProjectPortfolio2.DatabaseModel
             }
 
         }
+
+        public static string ConnectionString =
+            "host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123";
+
+        public User CreateUser(string email, string password, string name, string location)
+        {
+            using (var conn = new NpgsqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandText = "select * from create_user(@4)";
+                    cmd.Parameters.AddWithValue("@1", email);
+                    cmd.Parameters.AddWithValue("@2", password);
+                    cmd.Parameters.AddWithValue("@3", name);
+                    cmd.Parameters.AddWithValue("@4", location);
+                    Console.WriteLine("email " + email + " pass " + password + " name " + name + " location " + location);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        //while (reader.Read())
+                        //{
+                        //    Console.WriteLine($"Result(EF): {reader.GetInt32(0)}, {reader.GetString(1)}");
+                        //}
+                        Console.WriteLine("in reader");
+                        //TODO this needs to return actual user returned by function
+                        User user = new User
+                        {
+                            Name = name,
+                            Location = location,
+                            Password = password,
+                            Email = email
+                        };
+                        return user;
+                    }
+
+                }
+            }
+        }
+
         /*
         public List<CommentMarked> GetCommentsMarked(int id)
         {
