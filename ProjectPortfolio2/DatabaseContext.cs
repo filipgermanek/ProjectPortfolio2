@@ -25,7 +25,7 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
+            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
@@ -71,7 +71,7 @@ namespace ProjectPortfolio2
 
             modelBuilder.Entity<Question>().Property(x => x.ClosedDate).HasColumnName("closed_date");
 
-            modelBuilder.Entity<Answer>().Property(x => x.ParentId).HasColumnName("parent_id");
+            modelBuilder.Entity<Answer>().Property(x => x.QuestionId).HasColumnName("parent_id");
             modelBuilder.Entity<Answer>().Property(x => x.Accepted).HasColumnName("accepted");
         }
 

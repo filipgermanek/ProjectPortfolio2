@@ -64,7 +64,5 @@ namespace WebService.Controllers
             model.Url = Url.Link(nameof(GetComment), new { id = comment.Id });
             return model;
         }
-
-        
     }
 }

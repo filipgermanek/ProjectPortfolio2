@@ -5,6 +5,5 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         public int PostId { get; set; }
         public int TagId { get; set; }
-
     }
 }

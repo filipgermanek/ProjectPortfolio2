@@ -9,15 +9,17 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-        List<Question> GetPosts();
-        Question GetPostById(int id);
+        List<Question> GetQuestions();
+        Question GetQuestionById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
         Comment GetComment(int id);
         List<Comment> GetComments();
-        List<Answer> GetAnswersByParentId(int parentId);
+        List<Answer> GetAnswersByQuestionId(int questionId);
         Answer GetAnswer(int id);
+        List<Tag> GetTagsByQuestionId(int questionId);
+        Tag GetTag(int id);
         User CreateUser(string email, string password, string name, string location);
     }
     public class DataService : IDataService
@@ -40,11 +42,11 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Answer> GetAnswersByParentId(int parentId)
+        public List<Answer> GetAnswersByQuestionId(int questionId)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Answers.Where(x => x.ParentId.Equals(parentId)).ToList();
+                return db.Answers.Where(x => x.QuestionId.Equals(questionId)).ToList();
             }
         }
 
@@ -56,7 +58,7 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Question> GetPosts()
+        public List<Question> GetQuestions()
         {
             using (var db = new DatabaseContext())
             {
@@ -64,11 +66,18 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public Question GetPostById(int id)
+        public Question GetQuestionById(int id)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Questions.Find(id);
+                var question = db.Questions.Find(id);
+                if (question != null)
+                {
+                    Console.WriteLine("id of question is:" + id);
+                    question.Answers = db.Answers.Where(x => x.QuestionId.Equals(id)).ToList();
+                    Console.WriteLine("got past fetch!!!!!!!");
+                }
+                return question;
             }
         }
 
@@ -113,6 +122,23 @@ namespace ProjectPortfolio2.DatabaseModel
 
         }
 
+        public List<Tag> GetTagsByQuestionId(int questionId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                var postTagTagIds = db.PostTags.Where(x => x.PostId.Equals(questionId)).Select(x => x.TagId).ToList();
+                return db.Tags.Where(x => postTagTagIds.Contains(x.Id)).ToList();
+            }
+        }
+
+        public Tag GetTag(int tagId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Tags.Find(tagId);
+            }
+        }
+
         public static string ConnectionString =
             "host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123";
 
@@ -151,28 +177,5 @@ namespace ProjectPortfolio2.DatabaseModel
                 }
             }
         }
-
-        /*
-        public List<CommentMarked> GetCommentsMarked(int id)
-        {
-            using (var db = new DatabaseContext())
-            {
-                return db.CommentsMarked.Take(5).ToList();
-        
-            }
-        }
-        public CommentMarked GetCommentMarked(int id)
-        {
-            using (var db = new DatabaseContext())
-            {
-                return db.CommentsMarked.Find(id);
-            }
-        }
-
-    */
-
-
-
-
     }
 }
