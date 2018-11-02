@@ -8,7 +8,7 @@ using System.Diagnostics.Contracts;
 
 namespace WebService.Controllers
 {
-    [Route("api/comments")]
+    [Route("api/posts/{postId}/comments")]
     [ApiController]
     public class CommentsController :Controller
     {
@@ -18,11 +18,12 @@ namespace WebService.Controllers
             _dataService = dataService;
         }
 
-        [HttpGet(Name = nameof(GetComments))]
-        public IActionResult GetComments()
+
+        [HttpGet(Name = nameof(GetCommentsByPostId))]
+        public IActionResult GetCommentsByPostId(int postId)
         {
             Contract.Ensures(Contract.Result<IActionResult>() != null);
-            var comments = _dataService.GetComments().Select(CreateCommentListModel);
+            var comments = _dataService.GetCommentsByPostId(postId).Select(CreateCommentListModel);
             var result = new
             {
                 Items = comments
@@ -57,9 +58,7 @@ namespace WebService.Controllers
         {
             var model = new CommentListModel
             {
-                Score = comment.Score,
-                Text = comment.Text,
-                //CreationDate = comment.CreationDate
+                Score = comment.Score
             };
             model.Url = Url.Link(nameof(GetComment), new { id = comment.Id });
             return model;

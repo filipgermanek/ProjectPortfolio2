@@ -15,7 +15,7 @@ namespace ProjectPortfolio2.DatabaseModel
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
         Comment GetComment(int id);
-        List<Comment> GetComments();
+        List<Comment> GetCommentsByPostId(int postId);
         List<Answer> GetAnswersByQuestionId(int questionId);
         Answer GetAnswer(int id);
         List<Tag> GetTagsByQuestionId(int questionId);
@@ -105,11 +105,11 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Comment> GetComments()
+        public List<Comment> GetCommentsByPostId(int postId)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Comments.Take(5).ToList();
+                return db.Comments.Where(x => x.PostId.Equals(postId)).ToList();
             }
         }
 
