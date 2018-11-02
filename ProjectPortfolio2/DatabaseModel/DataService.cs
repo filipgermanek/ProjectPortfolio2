@@ -14,8 +14,10 @@ namespace ProjectPortfolio2.DatabaseModel
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
-        Comment GetComment(int id);
-        List<Comment> GetCommentsByPostId(int postId);
+        Comment GetCommentForQuestion(int id);
+        Comment GetCommentForAnswer(int id);
+        List<Comment> GetCommentsByQuestionId(int questionId);
+        List<Comment> GetCommentsByAnswerId(int answerid);
         List<Answer> GetAnswersByQuestionId(int questionId);
         Answer GetAnswer(int id);
         List<Tag> GetTagsByQuestionId(int questionId);
@@ -105,12 +107,40 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
+        public List<Comment> GetCommentsByAnswerId(int answerId)
+        {
+            return GetCommentsByPostId(answerId);
+        }
+
+        public List<Comment> GetCommentsByQuestionId(int questionId)
+        {
+            return GetCommentsByPostId(questionId);
+        }
+
         public List<Comment> GetCommentsByPostId(int postId)
         {
             using (var db = new DatabaseContext())
             {
                 return db.Comments.Where(x => x.PostId.Equals(postId)).ToList();
             }
+        }
+
+        /*
+         * TODO if there is enough time investigate this issue!!
+         * need separate function due to weird server error when using same function 
+         * for gettting comment in answers and questions controller
+         * Attribute routes with the same name 'GetCommentsByPostId' must have the same template:
+         * Action: 'WebService.Controllers.AnsweCommentsController.GetCommentsByPostId (WebService)' - Template: 'api/posts/{postId}/answers/{answerId}/comments'
+         * Action: 'WebService.Controllers.CommentsController.GetCommentsByPostId (WebService)' - Template: 'api/posts/{postId}/comments'
+         */
+        public Comment GetCommentForQuestion(int id)
+        {
+            return GetComment(id);
+        }
+
+        public Comment GetCommentForAnswer(int id)
+        {
+            return GetComment(id);
         }
 
         public Comment GetComment(int id)

@@ -49,7 +49,7 @@ namespace WebService.Controllers
                 Score = question.Score,
                 Body = question.Body,
                 CreationDate = question.CreationDate,
-                Answers = question.Answers.Select(answersController.CreateAnswerListModel).ToList()
+                Answers = question.Answers.Select(CreateAnswerListModel).ToList()
             };
             return model;
         }
@@ -65,18 +65,16 @@ namespace WebService.Controllers
             model.Url = Url.Link(nameof(GetQuestionById), new { id = question.Id });
             return model;
         }
-        //AnswerListModel CreateAnswerListModel(Answer answer)
-        //{
-        //    Console.WriteLine("Creating answer model: " + answer.Body);
-        //    var model = new AnswerListModel
-        //    {
-        //        Title = answer.Title,
-        //        Score = answer.Score
-        //    };
-        //    AnswersController answersController = new AnswersController(_dataService);
-        //    model.Url = Url.Link(nameof(answersController.GetAnswerById), new { id = answer.Id });
-        //    return model;
-        //}
+        public AnswerListModel CreateAnswerListModel(Answer answer)
+        {
+            var model = new AnswerListModel
+            {
+                Title = answer.Title,
+                Score = answer.Score
+            };
+            model.Url = Url.Link(nameof(AnswersController.GetAnswerById), new { id = answer.Id });
+            return model;
+        }
 
-}
+    }
 }
