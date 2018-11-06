@@ -1,10 +1,8 @@
 ﻿using System;
 namespace WebService.Models
 {
-    public class UserMarkedPostModel
+    public class PostMarkedModel
     {
-        int UserId { get; set; }
-        int PostId { get; set; }
         public string AnnotationText { get; set; }
         public string Url { get; set; }
     }

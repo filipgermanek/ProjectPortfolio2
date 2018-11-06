@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectPortfolio2.DatabaseModel;
 using WebService.Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace WebService.Controllers
 {
@@ -40,7 +41,6 @@ namespace WebService.Controllers
         public IActionResult CreateUser(UserModel userRequest)
         {
             var user = _dataService.CreateUser(userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Location);
-            // maybe someting else needs to be returned is user is null, also handle errors and validation like email already used etc.
             if (user == null) return NotFound();
             var model = CreateUserModel(user);
             return Ok(model);
@@ -49,50 +49,58 @@ namespace WebService.Controllers
         [HttpPut("{id}", Name = nameof(UpdateUser))]
         public IActionResult UpdateUser(int id, UserModel userRequest)
         {
-            //TODO update user function in dataservice
-            return NotFound();
+            var user = _dataService.UpdateUser(id, userRequest.Email, userRequest.Password, userRequest.Name, userRequest.Location);
+            if (user == null) return NotFound();
+            var model = CreateUserModel(user);
+            return Ok(model);
         }
 
         [HttpDelete("{id}", Name = nameof(DeleteUser))]
         public IActionResult DeleteUser(int id)
         {
-            //TODO delete user function in dataservice
-            return NotFound();
+            bool success = _dataService.DeleteUser(id);
+            return success ? Ok() : (IActionResult)NotFound();
         }
 
         [HttpGet("{id}/marked_posts", Name = nameof(GetMarkedQuestions))]
         public IActionResult GetMarkedQuestions(int id)
         {
-            //TODO questions marked by user
-            return NotFound();
+            var markedQuestions = _dataService.GetMarkedQuestions(id).Select(CreateUserMarkedPostModel);
+            var result = new {
+                Items = markedQuestions
+            };
+            return Ok(result);
         }
 
         [HttpPost("{id}/marked_posts", Name = nameof(MarkQuestion))]
-        public IActionResult MarkQuestion(MarkPostRequest markPostRequest)
+        public IActionResult MarkQuestion(int id, MarkPostRequest markPostRequest)
         {
             //TODO create marked_post record
-            return NotFound();
+            var markedPost = _dataService.UserMarkPost(markPostRequest.PostId, id, markPostRequest.AnnotationText);
+            if (markedPost == null) {
+                return NotFound();
+            }
+            var result = new
+            {
+                markedPost.PostId,
+                markedPost.UserId,
+                markedPost.AnnotationText
+            };
+            return Ok(result);
         }
 
         [HttpPut("{id}/marked_posts/{marked_post_id}", Name = nameof(UpdateMarkedQuestion))]
-        public IActionResult UpdateMarkedQuestion(int id, int markedPostId, MarkPostRequest markPostRequest)
+        public IActionResult UpdateMarkedQuestion(int id, int marked_post_id, MarkPostRequest markPostRequest)
         {
-            //TODO update marked_post
-            return NotFound();
+            var markedPost = _dataService.UserUpdateMarkedPost(marked_post_id, id, markPostRequest.AnnotationText);
+            return markedPost == null ? NotFound() : (IActionResult)Ok(markedPost);
         }
 
         [HttpDelete("{id}/marked_posts/{marked_post_id}", Name = nameof(UnmarkQuestion))]
         public IActionResult UnmarkQuestion(int id, int marked_post_id)
         {
-            //TODO delete marked post
-            return NotFound();
-        }
-
-        [HttpGet("{id}/marked_answers", Name = nameof(GetMarkedAnswers))]
-        public IActionResult GetMarkedAnswers(int id)
-        {
-            //TODO answers marked by user
-            return NotFound();
+            var success = _dataService.UserUnmarkPost(marked_post_id, id);
+            return success ? Ok() : (IActionResult)NotFound();
         }
 
         [HttpGet("{id}/marked_comments", Name = nameof(GetMarkedComments))]
@@ -105,8 +113,13 @@ namespace WebService.Controllers
         [HttpGet("{id}/search_history", Name = nameof(GetUserSearchHistory))]
         public IActionResult GetUserSearchHistory(int id)
         {
-            //TODO return user search history
-            return NotFound();
+            var SearchHistory = _dataService.GetUserSearchHistory(id).Select(CreateSearchHistoryModel);
+            if (SearchHistory == null) return NotFound();
+            var result = new
+            {
+                Items = SearchHistory
+            };
+            return Ok(result);
         }
 
         UserListModel CreateUserListModel(User user)
@@ -151,6 +164,7 @@ namespace WebService.Controllers
         {
             var model = new UserMarkedPostModel
             {
+                AnnotationText = postMarked.AnnotationText,
                 Url = Url.Link(nameof(QuestionsController.GetQuestionById), new { id = postMarked.PostId})
             };
             return model;

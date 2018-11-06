@@ -3,8 +3,8 @@ namespace WebService.Models
 {
     public class MarkPostRequest
     {
-        int UserId { get; set; }
-        int PostId { get; set; }
-        string Annotation { get; set; }
+        public int UserId { get; set; }
+        public int PostId { get; set; }
+        public string AnnotationText { get; set; }
     }
 }

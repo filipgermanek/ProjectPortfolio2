@@ -24,8 +24,15 @@ namespace ProjectPortfolio2.DatabaseModel
         List<Tag> GetTagsByQuestionId(int questionId);
         Tag GetTag(int id);
         User CreateUser(string email, string password, string name, string location);
+        User UpdateUser(int UserId, string Email, string Pwd, string Name, string Location);
+        bool DeleteUser(int UserId);
         int GetNumberOfQuestions();
         int GetNumberOfAnswersForQuestion(int questionId);
+        List<PostMarked> GetMarkedQuestions(int userId);
+        PostMarked UserMarkPost(int PostId, int UserId, string Annotation);
+        PostMarked UserUpdateMarkedPost(int PostId, int UserId, string Annotation);
+        bool UserUnmarkPost(int PostId, int UserId);
+        CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation);
     }
     public class DataService : IDataService
     {
@@ -120,12 +127,10 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 var user = db.Users.Find(id);
-                user.UserMarkedPosts = db.PostsMarked.Where(x => x.UserId.Equals(id)).ToList();
                 return user;
             }
         }
 
-        /*
         public List<SearchHistory> GetUserSearchHistory(int userId)
         {
             using (var db = new DatabaseContext())
@@ -133,7 +138,6 @@ namespace ProjectPortfolio2.DatabaseModel
                 return db.SearchHistories.Where(s => s.UserId.Equals(userId)).ToList();
             }
         }
-        */
 
         public List<Comment> GetCommentsByAnswerId(int answerId)
         {
@@ -209,8 +213,9 @@ namespace ProjectPortfolio2.DatabaseModel
                     {
                         Id = result.Id,
                         Name = result.Name,
-                        Email = result.Email
-
+                        Email = result.Email,
+                        Location = result.Location,
+                        Password = result.Password
                     };
                 }
             }return null;
@@ -239,7 +244,7 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 var usr = db.Users.Find(UserId);
-                if (usr != null)
+                if (usr != null && Email != null && Pwd != null && Name != null)
                 {
                     foreach (var result in db.Users.FromSql("select * from update_user({0},{1},{2},{3},{4})", UserId, Email, Pwd, Name, Location))
                     {
@@ -249,7 +254,8 @@ namespace ProjectPortfolio2.DatabaseModel
                             Id = result.Id,
                             Name = result.Name,
                             Email = result.Email,
-                            Location = result.Location
+                            Location = result.Location,
+                            Password = result.Password
                         };
                     }
                 }
@@ -257,32 +263,31 @@ namespace ProjectPortfolio2.DatabaseModel
             }return null;
         }
 
-        public List<SearchHistory> GetUserSearchHistory(int UserId)
-        {
-            using (var db = new DatabaseContext())
-            {
-                var usr = db.Users.Find(UserId);
-                if (usr != null)
-                {
-                    List<SearchHistory> UserSearchList = new List<SearchHistory>();
-                    foreach (var result in db.SearchHistories.FromSql("select * from get_user_search_history({0})", UserId))
-                    {
-                        Console.WriteLine($"Searched: {result.Id}, {result.Searchtext}, {result.CreationDate}");
-                        UserSearchList.Add(
-                            new SearchHistory
-                            {
-                                Id = result.Id,
-                                Searchtext = result.Searchtext,
-                                CreationDate = result.CreationDate
-                            }
-                        );
-                    }
-                    return UserSearchList;
+        //public List<SearchHistory> GetUserSearchHistory(int UserId)
+        //{
+        //    using (var db = new DatabaseContext())
+        //    {
+        //        var usr = db.Users.Find(UserId);
+        //        if (usr != null)
+        //        {
+        //            List<SearchHistory> UserSearchList = new List<SearchHistory>();
+        //            foreach (var result in db.SearchHistories.FromSql("select * from get_user_search_history({0})", UserId))
+        //            {
+        //                Console.WriteLine($"Searched: {result.Id}, {result.Searchtext}, {result.CreationDate}");
+        //                UserSearchList.Add(
+        //                    new SearchHistory
+        //                    {
+        //                        Id = result.Id,
+        //                        Searchtext = result.Searchtext,
+        //                        CreationDate = result.CreationDate
+        //                    }
+        //                );
+        //            }
+        //            return UserSearchList;
+        //        }
 
-                }
-
-            }return null;
-        }
+        //    }return null;
+        //}
 
         public SearchPostsResult SearchPosts(string SearchString, int UserId)
         {
@@ -387,41 +392,59 @@ namespace ProjectPortfolio2.DatabaseModel
             return null;
         }
 
-        public PostMarked UserUpdatePost(int PostId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
-        {
-            using (var db = new DatabaseContext())
-            {//check for marked post
-                foreach (var result in db.PostsMarked.FromSql("select * from update_annotation_to_marked_post({0}, {1}, {2})",
-                                                              PostId, UserId, Annotation))
-                {
-                    Console.WriteLine($"Post id({result.PostId}) by user({result.UserId}) updated annotation: {result.AnnotationText}");
-                    return new PostMarked
-                    {
-                        PostId = result.PostId,
-                        UserId = result.UserId,
-                        AnnotationText = result.AnnotationText
-                    };
-                }
-            }
-            return null;
-        }
-
-        //linq + if statement return boolean
-        public void UserUnmarkPost(int PostId, int UserId)
+        public PostMarked UserUpdateMarkedPost(int PostId, int UserId, string Annotation)
         {
             using (var db = new DatabaseContext())
             {
+                //check for marked post
+                var markedPost = db.PostsMarked.Find(PostId, UserId);
+                if (markedPost == null)
+                {
+                    //check if post and user exists
+                    var post = db.Questions.Find(PostId);
+                    var user = db.Users.Find(UserId);
+                    if (user == null || post == null) return null;
+                    foreach (var result in db.PostsMarked.FromSql("select * from update_annotation_to_marked_post({0}, {1}, {2})",
+                                                              PostId, UserId, Annotation))
+                    {
+                        Console.WriteLine($"Post id({result.PostId}) by user({result.UserId}) updated annotation: {result.AnnotationText}");
+                        return new PostMarked
+                        {
+                            PostId = result.PostId,
+                            UserId = result.UserId,
+                            AnnotationText = result.AnnotationText
+                        };
+                    }
+                }
+                return markedPost;
+            }
+        }
+
+        //linq + if statement return boolean
+        public bool UserUnmarkPost(int PostId, int UserId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                var markedPost = db.PostsMarked.Find(PostId, UserId);
+                if (markedPost == null) return false;
                 foreach (var result in db.PostsMarked.FromSql("select * from user_unmark_post({0}, {1})",
                                                               PostId, UserId))
                 {
                     Console.WriteLine($"Post id: {result.PostId} unmarked by user: {result.UserId}");
+                    return true;
                 }
             }
+            return false;
         }
 
+        public List<PostMarked> GetMarkedQuestions(int userId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.PostsMarked.Where(x => x.UserId.Equals(userId)).ToList();
 
-
-
+            }
+        }
 
     }
 }

@@ -10,7 +10,5 @@ namespace WebService.Models
         public string Name { get; set; }
         public string Location { get; set; }
         public DateTime CreationDate { get; set; }
-        public List<SearchHistoryModel> SearchHistoryList {get; set;}
-        public List<UserMarkedPostModel> MarkedPosts { get; set; }
     }
 }
