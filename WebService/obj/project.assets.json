@@ -4363,7 +4363,6 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.Logging.Console": "2.1.1",
-          "Microsoft.NETCore.App": "2.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "2.1.2"
         },
         "compile": {
@@ -11604,23 +11603,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/filipgermanek/.nuget/packages/": {},
+    "/Users/nicolaielhojnielsen/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/WebService.csproj",
+      "projectUniqueName": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/WebService.csproj",
       "projectName": "WebService",
-      "projectPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/WebService.csproj",
-      "packagesPath": "/Users/filipgermanek/.nuget/packages/",
-      "outputPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/",
+      "projectPath": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/WebService.csproj",
+      "packagesPath": "/Users/nicolaielhojnielsen/.nuget/packages/",
+      "outputPath": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/WebService/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/filipgermanek/.nuget/NuGet/NuGet.Config"
+        "/Users/nicolaielhojnielsen/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -11631,8 +11630,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj": {
-              "projectPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj"
+            "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj": {
+              "projectPath": "/Users/nicolaielhojnielsen/GitHub Kraken Projects/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj"
             }
           }
         }
@@ -11649,12 +11648,12 @@
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.1, )",
-            "autoReferenced": true
+            "version": "2.1.1"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.0, )",
+            "version": "2.1",
             "autoReferenced": true
           }
         },
