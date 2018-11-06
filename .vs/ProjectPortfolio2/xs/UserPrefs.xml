@@ -1,11 +1,13 @@
 ﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/DataService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProjectPortfolio2/DatabaseModel/Tag.cs">
     <Files>
-      <File FileName="WebService/Controllers/CommentsController.cs" Line="41" Column="10" />
-      <File FileName="WebService/Controllers/AnsweCommentsController.cs" Line="4" Column="32" />
-      <File FileName="WebService/Controllers/QuestionsController.cs" Line="5" Column="25" />
-      <File FileName="WebService/Controllers/AnswersController.cs" Line="43" Column="9" />
-      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="19" Column="14" />
+      <File FileName="WebService/Controllers/QuestionsController.cs" Line="34" Column="41" />
+      <File FileName="WebService/Models/QuestionModel.cs" Line="6" Column="18" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/DataService.cs" Line="155" Column="45" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/PostTag.cs" Line="7" Column="39" />
+      <File FileName="ProjectPortfolio2/DatabaseContext.cs" Line="149" Column="73" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Post.cs" Line="12" Column="52" />
+      <File FileName="ProjectPortfolio2/DatabaseModel/Tag.cs" Line="8" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

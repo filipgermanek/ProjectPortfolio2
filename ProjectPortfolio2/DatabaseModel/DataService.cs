@@ -75,9 +75,8 @@ namespace ProjectPortfolio2.DatabaseModel
                 var question = db.Questions.Find(id);
                 if (question != null)
                 {
-                    Console.WriteLine("id of question is:" + id);
                     question.Answers = db.Answers.Where(x => x.QuestionId.Equals(id)).ToList();
-                    Console.WriteLine("got past fetch!!!!!!!");
+                    question.Comments = db.Comments.Where(x => x.PostId.Equals(id)).ToList();
                 }
                 return question;
             }

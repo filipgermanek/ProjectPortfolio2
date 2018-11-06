@@ -62,7 +62,6 @@ namespace ProjectPortfolio2
             modelBuilder.Entity<Post>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Entity<Post>().Property(x => x.Body).HasColumnName("body");
             modelBuilder.Entity<Post>().Property(x => x.CreationDate).HasColumnName("creation_date");
-            modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Post>().Property(x => x.OwnerId).HasColumnName("owner_id");
             modelBuilder.Entity<Post>().Property(x => x.Type).HasColumnName("type");
             modelBuilder.Entity<Post>().HasDiscriminator(x => x.Type)
@@ -70,6 +69,7 @@ namespace ProjectPortfolio2
                         .HasValue<Answer>(2);
 
             modelBuilder.Entity<Question>().Property(x => x.ClosedDate).HasColumnName("closed_date");
+            modelBuilder.Entity<Question>().Property(x => x.Title).HasColumnName("title");
 
             modelBuilder.Entity<Answer>().Property(x => x.QuestionId).HasColumnName("parent_id");
             modelBuilder.Entity<Answer>().Property(x => x.Accepted).HasColumnName("accepted");
