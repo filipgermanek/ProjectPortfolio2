@@ -1,10 +1,10 @@
 ﻿using System;
-namespace ProjectPortfolio2.DatabaseModel
+namespace WebService.Models
 {
-    public class PostMarked
+    public class MarkCommentRequest
     {
-        public int PostId { get; set; }
         public int UserId { get; set; }
+        public int CommentId { get; set; }
         public string AnnotationText { get; set; }
     }
 }

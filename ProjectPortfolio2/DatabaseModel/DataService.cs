@@ -33,6 +33,9 @@ namespace ProjectPortfolio2.DatabaseModel
         PostMarked UserUpdateMarkedPost(int PostId, int UserId, string Annotation);
         bool UserUnmarkPost(int PostId, int UserId);
         CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation);
+        List<CommentMarked> GetMarkedComments(int userId);
+        CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string AnnotationText);
+        bool UserUnmarkComment(int CommentId, int UserId);
     }
     public class DataService : IDataService
     {
@@ -330,13 +333,11 @@ namespace ProjectPortfolio2.DatabaseModel
             }return null;
         }
 
-        //this also needs an linq + if statement???? if there is no comment to update
-        public CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
+        public CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string Annotation)
         {
             using (var db = new DatabaseContext())
             {
                 var usr = db.CommentsMarked.Find(CommentId, UserId);
-                //var cmt = db.CommentsMarked.Find(CommentId);
                 if (usr != null)
                 {
                     foreach (var result in db.CommentsMarked.FromSql("select * from update_annotation_to_marked_comment({0}, {1}, {2})",
@@ -443,6 +444,14 @@ namespace ProjectPortfolio2.DatabaseModel
             {
                 return db.PostsMarked.Where(x => x.UserId.Equals(userId)).ToList();
 
+            }
+        }
+
+        public List<CommentMarked> GetMarkedComments(int userId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.CommentsMarked.Where(x => x.UserId.Equals(userId)).ToList();
             }
         }
 

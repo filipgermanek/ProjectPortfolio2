@@ -4,6 +4,7 @@ using ProjectPortfolio2.DatabaseModel;
 using WebService.Models;
 using System.Linq;
 using System.Collections.Generic;
+using ProjectPortfolio2;
 
 namespace WebService.Controllers
 {
@@ -75,7 +76,6 @@ namespace WebService.Controllers
         [HttpPost("{id}/marked_posts", Name = nameof(MarkQuestion))]
         public IActionResult MarkQuestion(int id, MarkPostRequest markPostRequest)
         {
-            //TODO create marked_post record
             var markedPost = _dataService.UserMarkPost(markPostRequest.PostId, id, markPostRequest.AnnotationText);
             if (markedPost == null) {
                 return NotFound();
@@ -106,8 +106,52 @@ namespace WebService.Controllers
         [HttpGet("{id}/marked_comments", Name = nameof(GetMarkedComments))]
         public IActionResult GetMarkedComments(int id)
         {
-            //TODO comments marked by user
-            return NotFound();
+            var markedComments = _dataService.GetMarkedComments(id).Select(CreateUserMarkedCommentModel);
+            var result = new
+            {
+                Items = markedComments
+            };
+            return Ok(result);
+        }
+
+        [HttpPost("{id}/marked_comments", Name = nameof(MarkComment))]
+        public IActionResult MarkComment(int id, MarkCommentRequest markCommentRequest)
+        {
+            var markedComment = _dataService.UserMarkComment(markCommentRequest.CommentId, id, markCommentRequest.AnnotationText);
+            if (markedComment == null)
+            {
+                return NotFound();
+            }
+            var result = new
+            {
+                markedComment.CommentId,
+                markedComment.UserId,
+                markedComment.AnnotationText
+            };
+            return Ok(result);
+        }
+
+        [HttpPut("{id}/marked_comments/{marked_comment_id}", Name = nameof(UpdateMarkedComment))]
+        public IActionResult UpdateMarkedComment(int id, int marked_comment_id, MarkCommentRequest markCommentRequest)
+        {
+            var markedComment = _dataService.UserUpdateCommentAnnotation(marked_comment_id, id, markCommentRequest.AnnotationText);
+            if (markedComment == null) {
+                return NotFound();
+            }
+            var result = new
+            {
+                markedComment.CommentId,
+                markedComment.UserId,
+                markedComment.AnnotationText
+            };
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}/marked_comments/{marked_comment_id}", Name = nameof(UnmarkComment))]
+        public IActionResult UnmarkComment(int id, int marked_comment_id)
+        {
+            var success = _dataService.UserUnmarkComment(marked_comment_id, id);
+            return success ? Ok() : (IActionResult)NotFound();
         }
 
         [HttpGet("{id}/search_history", Name = nameof(GetUserSearchHistory))]
@@ -143,10 +187,6 @@ namespace WebService.Controllers
                 Location = user.Location,
                 CreationDate = user.CreationDate,
             };
-            //var userSearchHistory = _dataService.GetUserSearchHistory(user.Id).Select(CreateSearchHistoryModel);
-            //model.SearchHistoryList = userSearchHistory.ToList();
-            //var markedPosts = user.UserMarkedPosts.Select(CreateUserMarkedPostModel).ToList();
-            //model.MarkedPosts = markedPosts;
             return model;
         }
 
@@ -166,6 +206,15 @@ namespace WebService.Controllers
             {
                 AnnotationText = postMarked.AnnotationText,
                 Url = Url.Link(nameof(QuestionsController.GetQuestionById), new { id = postMarked.PostId})
+            };
+            return model;
+        }
+
+        UserMarkedCommentModel CreateUserMarkedCommentModel(CommentMarked commentMarked)
+        {
+            var model = new UserMarkedCommentModel
+            {
+                AnnotationText = commentMarked.AnnotationText
             };
             return model;
         }
