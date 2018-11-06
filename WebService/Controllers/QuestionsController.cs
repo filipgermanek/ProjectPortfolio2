@@ -18,11 +18,21 @@ namespace WebService.Controllers
         }
         //QUESTION ROUTES START
         [HttpGet(Name = nameof(GetQuestions))]
-        public IActionResult GetQuestions()
+        public IActionResult GetQuestions(int page = 0, int pageSize = 5)
         {
-            var posts = _dataService.GetQuestions().Select(CreateQuestionListModel);
+            var posts = _dataService.GetQuestions(page, pageSize).Select(CreateQuestionListModel);
+
+            var numberOfItems = _dataService.GetNumberOfQuestions();
+            var numberOfPages = ComputeNumberOfPages(pageSize, numberOfItems);
+
             var result = new
             {
+                NumberOfItems = numberOfItems,
+                NumberOfPages = numberOfPages,
+                First = CreateLink(0, pageSize),
+                Prev = CreateLinkToPrevPage(page, pageSize),
+                Next = CreateLinkToNextPage(page, pageSize, numberOfPages),
+                Last = CreateLink(numberOfPages - 1, pageSize),
                 Items = posts
             };
             return Ok(result);
@@ -47,7 +57,6 @@ namespace WebService.Controllers
         [HttpGet("{id}/comments", Name = nameof(GetCommentsByQuestionId))]
         public IActionResult GetCommentsByQuestionId(int id)
         {
-            //Contract.Ensures(Contract.Result<IActionResult>() != null);
             var comments = _dataService.GetCommentsByQuestionId(id).Select(x => CreateCommentListModel(x, true));
             var result = new
             {
@@ -58,7 +67,6 @@ namespace WebService.Controllers
         [HttpGet("{id}/comments/{commentId}", Name = nameof(GetCommentForQuestion))]
         public IActionResult GetCommentForQuestion(int commentId)
         {
-           // Contract.Ensures(Contract.Result<IActionResult>() != null);
             var comment = _dataService.GetCommentForQuestion(commentId);
             if (comment == null) return NotFound();
             var model = CreateCommentModel(comment);
@@ -68,10 +76,10 @@ namespace WebService.Controllers
 
         //ANSWERS ROUTES START
         [HttpGet("{id}/answers",Name = nameof(GetAnswersByQuestionid))]
-        public IActionResult GetAnswersByQuestionid(int id)
+        public IActionResult GetAnswersByQuestionid(int page, int pageSize,int id)
         {
-            Console.WriteLine("in answers for post: " + id);
             var answers = _dataService.GetAnswersByQuestionId(id).Select(CreateAnswerListModel);
+
             var result = new
             {
                 Items = answers
@@ -183,7 +191,7 @@ namespace WebService.Controllers
                 CreationDate = question.CreationDate,
                 Answers = question.Answers?.Select(CreateAnswerListModel).ToList(),
                 Comments = question.Comments?.Select(x => CreateCommentListModel(x, true)).ToList(),
-                Tags = question.Tags?.Select(x => CreateTagModel(x, true)).ToList()
+              // Tags = question.PostTags?.Select(x => CreateTagModel(x, true)).ToList()
             };
             return model;
         }
@@ -222,5 +230,28 @@ namespace WebService.Controllers
             return model;
         }
 
+        //HELPERS
+        private static int ComputeNumberOfPages(int pageSize, int numberOfItems)
+        {
+            return (int)Math.Ceiling((double)numberOfItems / pageSize);
+        }
+        private string CreateLink(int page, int pageSize)
+        {
+            return Url.Link(nameof(GetQuestions), new { page, pageSize });
+        }
+
+        private string CreateLinkToNextPage(int page, int pageSize, int numberOfPages)
+        {
+            return page >= numberOfPages - 1
+                ? null
+                : CreateLink(page = page + 1, pageSize);
+        }
+
+        private string CreateLinkToPrevPage(int page, int pageSize)
+        {
+            return page == 0
+                ? null
+                : CreateLink(page - 1, pageSize);
+        }
     }
 }

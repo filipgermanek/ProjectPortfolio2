@@ -69,6 +69,8 @@ namespace WebService.Controllers
             };
             var userSearchHistory = _dataService.GetUserSearchHistory(user.Id).Select(CreateSearchHistoryModel);
             model.SearchHistoryList = userSearchHistory.ToList();
+            var markedPosts = user.UserMarkedPosts.Select(CreateUserMarkedPostModel).ToList();
+            model.MarkedPosts = markedPosts;
             return model;
         }
 
@@ -78,6 +80,15 @@ namespace WebService.Controllers
             {
                 Searchtext = searchHistory.Searchtext,
                 CreationDate = searchHistory.CreationDate
+            };
+            return model;
+        }
+
+        UserMarkedPostModel CreateUserMarkedPostModel(PostMarked postMarked)
+        {
+            var model = new UserMarkedPostModel
+            {
+                Url = Url.Link(nameof(QuestionsController.GetQuestionById), new { id = postMarked.PostId})
             };
             return model;
         }

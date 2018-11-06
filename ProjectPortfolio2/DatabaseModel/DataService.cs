@@ -9,7 +9,7 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-        List<Question> GetQuestions();
+        List<Question> GetQuestions(int page, int pageSize);
         Question GetQuestionById(int id);
         List<User> GetUsers();
         User GetUser(int id);
@@ -23,6 +23,8 @@ namespace ProjectPortfolio2.DatabaseModel
         List<Tag> GetTagsByQuestionId(int questionId);
         Tag GetTag(int id);
         User CreateUser(string email, string password, string name, string location);
+        int GetNumberOfQuestions();
+        int GetNumberOfAnswersForQuestion(int questionId);
     }
     public class DataService : IDataService
     {
@@ -48,7 +50,9 @@ namespace ProjectPortfolio2.DatabaseModel
         {
             using (var db = new DatabaseContext())
             {
-                return db.Answers.Where(x => x.QuestionId.Equals(questionId)).ToList();
+                return db.Answers
+                         .Where(x => x.QuestionId.Equals(questionId))
+                         .ToList();
             }
         }
 
@@ -60,11 +64,31 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Question> GetQuestions()
+        public int GetNumberOfQuestions()
         {
             using (var db = new DatabaseContext())
             {
-                return db.Questions.Take(10).ToList();
+                return db.Questions.Count();
+            }
+        }
+
+        public int GetNumberOfAnswersForQuestion(int questionId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Answers.Where(x => x.QuestionId.Equals(questionId)).Count();
+
+            }
+        }
+
+            public List<Question> GetQuestions(int page, int pageSize)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Questions
+                         .Skip(page * pageSize)
+                         .Take(pageSize)
+                         .ToList();
             }
         }
 
@@ -94,7 +118,9 @@ namespace ProjectPortfolio2.DatabaseModel
         {
             using (var db = new DatabaseContext())
             {
-                return db.Users.Find(id);
+                var user = db.Users.Find(id);
+                user.UserMarkedPosts = db.PostsMarked.Where(x => x.UserId.Equals(id)).ToList();
+                return user;
             }
         }
 
