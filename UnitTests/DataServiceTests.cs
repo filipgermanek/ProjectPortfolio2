@@ -9,10 +9,10 @@ namespace UnitTests
         [Fact]
         public void Question_Object_HasIdTitleAndBody()
         {
-            var category = new Question();
-            Assert.Equal(0, category.Id);
-            Assert.Null(category.Title);
-            Assert.Null(category.Body);
+            var question = new Question();
+            Assert.Equal(0, question.Id);
+            Assert.Null(question.Title);
+            Assert.Null(question.Body);
         }
 
         [Fact]
