@@ -10,10 +10,8 @@ namespace ProjectPortfolio2
         public int? Score { get; set; }
         public string Body{ get; set; }
         public DateTime? CreationDate { get; set; }
-        public string Title { get; set; }
         public int OwnerId { get; set; }
         public int Type { get; set; }
-        public List<Tag> Tags { get; set;}
         public List<Comment> Comments { get; set; }
     }
 }

@@ -12,5 +12,7 @@ namespace ProjectPortfolio2.DatabaseModel
         public string Location { get; set; }
         public DateTime CreationDate { get; set; }
         public List<SearchHistory> UserSearchHistory { get; set; }
+        public List<PostMarked> UserMarkedPosts { get; set; }
+        public List<CommentMarked> UserMakredComments { get; set; }
     }
 }

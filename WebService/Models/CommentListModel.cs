@@ -10,6 +10,5 @@ namespace WebService.Models
     {
         public String Url { get; set; }
         public int? Score { get; set; } // ? means that the value can be null - not needed on strings
-        public string Text { get; set; }
     }
 }
