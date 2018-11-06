@@ -49,7 +49,7 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=postgres;pwd=Adelecleo1");
+            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
@@ -94,7 +94,6 @@ namespace ProjectPortfolio2
             modelBuilder.Entity<Post>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Entity<Post>().Property(x => x.Body).HasColumnName("body");
             modelBuilder.Entity<Post>().Property(x => x.CreationDate).HasColumnName("creation_date");
-            modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Post>().Property(x => x.OwnerId).HasColumnName("owner_id");
             modelBuilder.Entity<Post>().Property(x => x.Type).HasColumnName("type");
             modelBuilder.Entity<Post>().HasDiscriminator(x => x.Type)
@@ -102,8 +101,9 @@ namespace ProjectPortfolio2
                         .HasValue<Answer>(2);
 
             modelBuilder.Entity<Question>().Property(x => x.ClosedDate).HasColumnName("closed_date");
+            modelBuilder.Entity<Question>().Property(x => x.Title).HasColumnName("title");
 
-            modelBuilder.Entity<Answer>().Property(x => x.ParentId).HasColumnName("parent_id");
+            modelBuilder.Entity<Answer>().Property(x => x.QuestionId).HasColumnName("parent_id");
             modelBuilder.Entity<Answer>().Property(x => x.Accepted).HasColumnName("accepted");
         }
 

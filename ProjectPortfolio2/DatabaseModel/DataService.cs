@@ -9,15 +9,19 @@ namespace ProjectPortfolio2.DatabaseModel
     {
         List<Owner> GetOwners();
         Owner GetOwner(int id);
-        List<Question> GetPosts();
-        Question GetPostById(int id);
+        List<Question> GetQuestions();
+        Question GetQuestionById(int id);
         List<User> GetUsers();
         User GetUser(int id);
         List<SearchHistory> GetUserSearchHistory(int userId);
-        Comment GetComment(int id);
-        List<Comment> GetComments();
-        List<Answer> GetAnswersByParentId(int parentId);
+        Comment GetCommentForQuestion(int id);
+        Comment GetCommentForAnswer(int id);
+        List<Comment> GetCommentsByQuestionId(int questionId);
+        List<Comment> GetCommentsByAnswerId(int answerid);
+        List<Answer> GetAnswersByQuestionId(int questionId);
         Answer GetAnswer(int id);
+        List<Tag> GetTagsByQuestionId(int questionId);
+        Tag GetTag(int id);
         User CreateUser(string email, string password, string name, string location);
     }
     public class DataService : IDataService
@@ -40,11 +44,11 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Answer> GetAnswersByParentId(int parentId)
+        public List<Answer> GetAnswersByQuestionId(int questionId)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Answers.Where(x => x.ParentId.Equals(parentId)).ToList();
+                return db.Answers.Where(x => x.QuestionId.Equals(questionId)).ToList();
             }
         }
 
@@ -56,7 +60,7 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Question> GetPosts()
+        public List<Question> GetQuestions()
         {
             using (var db = new DatabaseContext())
             {
@@ -64,11 +68,17 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public Question GetPostById(int id)
+        public Question GetQuestionById(int id)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Questions.Find(id);
+                var question = db.Questions.Find(id);
+                if (question != null)
+                {
+                    question.Answers = db.Answers.Where(x => x.QuestionId.Equals(id)).ToList();
+                    question.Comments = db.Comments.Where(x => x.PostId.Equals(id)).ToList();
+                }
+                return question;
             }
         }
 
@@ -96,12 +106,40 @@ namespace ProjectPortfolio2.DatabaseModel
             }
         }
 
-        public List<Comment> GetComments()
+        public List<Comment> GetCommentsByAnswerId(int answerId)
+        {
+            return GetCommentsByPostId(answerId);
+        }
+
+        public List<Comment> GetCommentsByQuestionId(int questionId)
+        {
+            return GetCommentsByPostId(questionId);
+        }
+
+        public List<Comment> GetCommentsByPostId(int postId)
         {
             using (var db = new DatabaseContext())
             {
-                return db.Comments.Take(5).ToList();
+                return db.Comments.Where(x => x.PostId.Equals(postId)).ToList();
             }
+        }
+
+        /*
+         * TODO if there is enough time investigate this issue!!
+         * need separate function due to weird server error when using same function 
+         * for gettting comment in answers and questions controller
+         * Attribute routes with the same name 'GetCommentsByPostId' must have the same template:
+         * Action: 'WebService.Controllers.AnsweCommentsController.GetCommentsByPostId (WebService)' - Template: 'api/posts/{postId}/answers/{answerId}/comments'
+         * Action: 'WebService.Controllers.CommentsController.GetCommentsByPostId (WebService)' - Template: 'api/posts/{postId}/comments'
+         */
+        public Comment GetCommentForQuestion(int id)
+        {
+            return GetComment(id);
+        }
+
+        public Comment GetCommentForAnswer(int id)
+        {
+            return GetComment(id);
         }
 
         public Comment GetComment(int id)
@@ -111,6 +149,23 @@ namespace ProjectPortfolio2.DatabaseModel
                 return db.Comments.Find(id);
             }
 
+        }
+
+        public List<Tag> GetTagsByQuestionId(int questionId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                var postTagTagIds = db.PostTags.Where(x => x.PostId.Equals(questionId)).Select(x => x.TagId).ToList();
+                return db.Tags.Where(x => postTagTagIds.Contains(x.Id)).ToList();
+            }
+        }
+
+        public Tag GetTag(int tagId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Tags.Find(tagId);
+            }
         }
 
         public static string ConnectionString =
@@ -151,28 +206,5 @@ namespace ProjectPortfolio2.DatabaseModel
                 }
             }
         }
-
-        /*
-        public List<CommentMarked> GetCommentsMarked(int id)
-        {
-            using (var db = new DatabaseContext())
-            {
-                return db.CommentsMarked.Take(5).ToList();
-        
-            }
-        }
-        public CommentMarked GetCommentMarked(int id)
-        {
-            using (var db = new DatabaseContext())
-            {
-                return db.CommentsMarked.Find(id);
-            }
-        }
-
-    */
-
-
-
-
     }
 }
