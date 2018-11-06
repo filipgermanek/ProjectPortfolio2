@@ -1,0 +1,17 @@
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/xunit.runner.reporters.netcoreapp10.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/xunit.runner.utility.netcoreapp10.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/UnitTests.deps.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/UnitTests.runtimeconfig.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/UnitTests.runtimeconfig.dev.json
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/UnitTests.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/UnitTests.pdb
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.csprojAssemblyReference.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.csproj.CoreCompileInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.AssemblyInfoInputs.cache
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.AssemblyInfo.cs
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.pdb
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/ProjectPortfolio2.dll
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/bin/Debug/netcoreapp2.1/ProjectPortfolio2.pdb
+/Users/filipgermanek/Desktop/ProjectPortfolio2/UnitTests/obj/Debug/netcoreapp2.1/UnitTests.csproj.CopyComplete
