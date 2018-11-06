@@ -5,14 +5,38 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
+//for sql functions
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
 namespace ProjectPortfolio2
 {
+
+    public class SearchPostsResult
+    {
+        public int Id { get; set; }
+        public int? Score { get; set; }
+        public string Body { get; set; }
+        public DateTime? CreationDate { get; set; }
+        public DateTime? ClosedDate { get; set; }
+        public string Title { get; set; }
+        public int? ParentId { get; set; }
+        //public int Accepted { get; set; } //THIS IS IN TYPE BITARRAY, WHICH IS NOT IN C#?
+        public int OwnerId { get; set; }
+    }
+
     public class DatabaseContext : DbContext
     {
+        //for sql functions
+        public DbQuery<SearchPostsResult> SearchPostsResults { get; set; }
+
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Comment> Comments {get; set; }
         public DbSet<CommentMarked> CommentsMarked {get; set; }
-       // public DbSet<Post> Posts {get; set; }
+        public DbSet<Post> Posts {get; set; }
         public DbSet<PostLink> PostLinks { get; set; }
         public DbSet<PostMarked> PostsMarked { get; set; }
         public DbSet<PostTag> PostTags { get; set; }
@@ -25,7 +49,7 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
+            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=postgres;pwd=Adelecleo1");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
@@ -33,6 +57,14 @@ namespace ProjectPortfolio2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //for SQL Functions
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.CreationDate).HasColumnName("creation_date");
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.ClosedDate).HasColumnName("closed_date");
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.ParentId).HasColumnName("parent_id");
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.OwnerId).HasColumnName("owner_id");
+
+
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
             modelBuilder.ApplyConfiguration(new CommentMarkedConfiguration());
