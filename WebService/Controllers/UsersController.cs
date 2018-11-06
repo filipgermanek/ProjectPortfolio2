@@ -46,6 +46,69 @@ namespace WebService.Controllers
             return Ok(model);
         }
 
+        [HttpPut("{id}", Name = nameof(UpdateUser))]
+        public IActionResult UpdateUser(int id, UserModel userRequest)
+        {
+            //TODO update user function in dataservice
+            return NotFound();
+        }
+
+        [HttpDelete("{id}", Name = nameof(DeleteUser))]
+        public IActionResult DeleteUser(int id)
+        {
+            //TODO delete user function in dataservice
+            return NotFound();
+        }
+
+        [HttpGet("{id}/marked_posts", Name = nameof(GetMarkedQuestions))]
+        public IActionResult GetMarkedQuestions(int id)
+        {
+            //TODO questions marked by user
+            return NotFound();
+        }
+
+        [HttpPost("{id}/marked_posts", Name = nameof(MarkQuestion))]
+        public IActionResult MarkQuestion(MarkPostRequest markPostRequest)
+        {
+            //TODO create marked_post record
+            return NotFound();
+        }
+
+        [HttpPut("{id}/marked_posts/{marked_post_id}", Name = nameof(UpdateMarkedQuestion))]
+        public IActionResult UpdateMarkedQuestion(int id, int markedPostId, MarkPostRequest markPostRequest)
+        {
+            //TODO update marked_post
+            return NotFound();
+        }
+
+        [HttpDelete("{id}/marked_posts/{marked_post_id}", Name = nameof(UnmarkQuestion))]
+        public IActionResult UnmarkQuestion(int id, int marked_post_id)
+        {
+            //TODO delete marked post
+            return NotFound();
+        }
+
+        [HttpGet("{id}/marked_answers", Name = nameof(GetMarkedAnswers))]
+        public IActionResult GetMarkedAnswers(int id)
+        {
+            //TODO answers marked by user
+            return NotFound();
+        }
+
+        [HttpGet("{id}/marked_comments", Name = nameof(GetMarkedComments))]
+        public IActionResult GetMarkedComments(int id)
+        {
+            //TODO comments marked by user
+            return NotFound();
+        }
+
+        [HttpGet("{id}/search_history", Name = nameof(GetUserSearchHistory))]
+        public IActionResult GetUserSearchHistory(int id)
+        {
+            //TODO return user search history
+            return NotFound();
+        }
+
         UserListModel CreateUserListModel(User user)
         {
             var model = new UserListModel
@@ -67,10 +130,10 @@ namespace WebService.Controllers
                 Location = user.Location,
                 CreationDate = user.CreationDate,
             };
-            var userSearchHistory = _dataService.GetUserSearchHistory(user.Id).Select(CreateSearchHistoryModel);
-            model.SearchHistoryList = userSearchHistory.ToList();
-            var markedPosts = user.UserMarkedPosts.Select(CreateUserMarkedPostModel).ToList();
-            model.MarkedPosts = markedPosts;
+            //var userSearchHistory = _dataService.GetUserSearchHistory(user.Id).Select(CreateSearchHistoryModel);
+            //model.SearchHistoryList = userSearchHistory.ToList();
+            //var markedPosts = user.UserMarkedPosts.Select(CreateUserMarkedPostModel).ToList();
+            //model.MarkedPosts = markedPosts;
             return model;
         }
 

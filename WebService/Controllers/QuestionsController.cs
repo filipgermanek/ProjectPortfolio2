@@ -231,23 +231,23 @@ namespace WebService.Controllers
         }
 
         //HELPERS
-        private static int ComputeNumberOfPages(int pageSize, int numberOfItems)
+        static int ComputeNumberOfPages(int pageSize, int numberOfItems)
         {
             return (int)Math.Ceiling((double)numberOfItems / pageSize);
         }
-        private string CreateLink(int page, int pageSize)
+        string CreateLink(int page, int pageSize)
         {
             return Url.Link(nameof(GetQuestions), new { page, pageSize });
         }
 
-        private string CreateLinkToNextPage(int page, int pageSize, int numberOfPages)
+        string CreateLinkToNextPage(int page, int pageSize, int numberOfPages)
         {
             return page >= numberOfPages - 1
                 ? null
                 : CreateLink(page = page + 1, pageSize);
         }
 
-        private string CreateLinkToPrevPage(int page, int pageSize)
+        string CreateLinkToPrevPage(int page, int pageSize)
         {
             return page == 0
                 ? null
