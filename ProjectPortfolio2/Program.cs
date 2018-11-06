@@ -11,26 +11,30 @@ namespace ProjectPortfolio2
     {
         static void Main(string[] args)
         {
-            //CreateUser("nicolaisen@ja.dk", "mitpsdw", "MitNavn", "Danmark");
-            //DeleteUser(2);
-            //UpdateUser(4, "email@mail.com", "pwd2", "nytNavn", "Dk" );
+            Program program = new Program();
 
-            //GetUserSearchHistory(4);
-            SearchPosts("always", 4);
+            //program.CreateUser("nicolaisen@ja.dk", "mitpsdw", "MitNavn", "Danmark");
+            //program.DeleteUser(4);
+            //program.UpdateUser(5, "email@mail.com", "pwd2", "nytNavn", "Dk" );
 
-            //UserMarkComment(35996338, 2, "this is alsoooooddsfdg marked");
-            //UserUnmarkComment(35996338, 2);
-            //UserUpdateCommentAnnotation(35996338, 2, "updated agaiinnananan");
-            //UserMarkPost(22525799, 4, "hej post du marked");
+            //program.GetUserSearchHistory(5);
+            //program.SearchPosts("always", 4);
+
+            //program.UserMarkComment(9158912, 5, "this is alsoooooddsfdg marked");
+            //program.UserUpdateCommentAnnotation(9158912, 5, "updated agaiinnananan");
+            //program.UserUnmarkComment(9158912, 5);
+
+
+            program.UserMarkPost(22106846, 1, "hej post du marked", true);
             //UserUpdatePost(22525799, 4, "nnyyyyyy");
             //UserUnmarkPost(22525799, 4); 
         }
 
-        private static User CreateUser(string Mail, string Pwd, string Name, string Location)
+        public User CreateUser(string Mail, string Pwd, string Name, string Location)
         {
             using (var db = new DatabaseContext())
             {
-                foreach(var result in db.Users.FromSql("select * from create_user({0}, {1}, {2}, {3})", Mail, Pwd, Name, Location))
+                foreach (var result in db.Users.FromSql("select * from create_user({0}, {1}, {2}, {3})", Mail, Pwd, Name, Location))
                 {
                     Console.WriteLine($"User created, with id: {result.Id}, Name: {result.Name}, Mail: {result.Email}");
                     return new User
@@ -44,54 +48,76 @@ namespace ProjectPortfolio2
             }return null;
         }
 
-        private static void DeleteUser(int UserId) //use linq to determine if user exists return boolean
+        public bool DeleteUser(int UserId) 
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.Users.FromSql("select * from delete_user({0})", UserId))
+                var usr = db.Users.Find(UserId);
+                if (usr != null)
                 {
-                    Console.WriteLine($"user: {result.Name}, id: {result.Id} has been deleted");
+                    foreach (var result in db.Users.FromSql("select * from delete_user({0})", UserId))
+                    {
+                        Console.WriteLine($"Delted: {result.Name}, id: {result.Id} has been deleted");
+                        return true;
+                    }
+                }return false;
 
-                }
+
             }
         }
 
-        private static User UpdateUser(int UserId, string Email, string Pwd, string Name, string Location)
+        public User UpdateUser(int UserId, string Email, string Pwd, string Name, string Location)
         {
             using (var db = new DatabaseContext())
             {
-                foreach(var result in db.Users.FromSql("select * from update_user({0},{1},{2},{3},{4})", UserId, Email, Pwd, Name, Location))
+                var usr = db.Users.Find(UserId);
+                if (usr != null)
                 {
-                    Console.WriteLine($"user with id: {result.Id}, updated. New info: {result.Name},{result.Email},{result.Location}");
-                    return new User
+                    foreach (var result in db.Users.FromSql("select * from update_user({0},{1},{2},{3},{4})", UserId, Email, Pwd, Name, Location))
                     {
-                        Id = result.Id,
-                        Name = result.Name,
-                        Email = result.Email,
-                        Location = result.Location
-                    };
+                        Console.WriteLine($"user with id: {result.Id}, updated. New info: {result.Name},{result.Email},{result.Location}");
+                        return new User
+                        {
+                            Id = result.Id,
+                            Name = result.Name,
+                            Email = result.Email,
+                            Location = result.Location
+                        };
+                    }
                 }
+
             }return null;
         }
 
-        private static SearchHistory GetUserSearchHistory(int UserId)
+        public List<SearchHistory> GetUserSearchHistory(int UserId)
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.SearchHistories.FromSql("select * from get_user_search_history({0})", UserId))
+                var usr = db.Users.Find(UserId);
+                if (usr != null)
                 {
-                    Console.WriteLine($"Searched: {result.Id}, {result.Searchtext}, {result.CreationDate}");
-                    return new SearchHistory
+                    List<SearchHistory> UserSearchList = new List<SearchHistory>();
+                    foreach (var result in db.SearchHistories.FromSql("select * from get_user_search_history({0})", UserId))
                     {
-                        Id = result.Id,
-                        Searchtext = result.Searchtext,
-                        CreationDate = result.CreationDate
-                    };
+                        Console.WriteLine($"Searched: {result.Id}, {result.Searchtext}, {result.CreationDate}");
+                        UserSearchList.Add(
+                            new SearchHistory
+                            {
+                                Id = result.Id,
+                                Searchtext = result.Searchtext,
+                                CreationDate = result.CreationDate
+                            }
+                        );
+                    }
+                    return UserSearchList;
+
                 }
-            }return null;
+
+            }
+            return null;
         }
 
-        private static SearchPostsResult SearchPosts(string SearchString, int UserId)
+        public SearchPostsResult SearchPosts(string SearchString, int UserId)
         {
             using (var db = new DatabaseContext())
             {
@@ -110,76 +136,107 @@ namespace ProjectPortfolio2
                 }
             }return null;
         }
-
-        private static CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
+        //check if comment and user != null, if null return null if not run 
+        public CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.CommentsMarked.FromSql("select * from user_mark_comment({0}, {1}, {2})", 
-                                                                    CommentId, UserId, Annotation))
+                var usr = db.Users.Find(UserId);
+                var ann = db.Comments.Find(CommentId);
+                if (usr != null && ann != null)
                 {
-                    Console.WriteLine($"Comment id({result.CommentId}) by user({result.UserId}) marked with annotation: {result.AnnotationText}");
-                    return new CommentMarked
+                    foreach (var result in db.CommentsMarked.FromSql("select * from user_mark_comment({0}, {1}, {2})",
+                                    CommentId, UserId, Annotation))
                     {
-                        CommentId = result.CommentId,
-                        UserId = result.UserId,
-                        AnnotationText = result.AnnotationText
-                    };
+                        Console.WriteLine($"Comment id({result.CommentId}) by user({result.UserId}) marked with annotation: {result.AnnotationText}");
+                        return new CommentMarked
+                        {
+                            CommentId = result.CommentId,
+                            UserId = result.UserId,
+                            AnnotationText = result.AnnotationText
+                        };
+                    }
+
                 }
+
             }return null;   
         }
 
-        //this also needs an linq + if statement???? if there is no comment to update
-        private static CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
+        //check if annotation id and user id exists
+        public CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string Annotation)
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.CommentsMarked.FromSql("select * from update_annotation_to_marked_comment({0}, {1}, {2})",
-                                                                               CommentId, UserId, Annotation))
+                var usr = db.CommentsMarked.Find(CommentId, UserId);
+                if (usr != null)
                 {
-                    Console.WriteLine($"Comment id({result.CommentId}) by user({result.UserId}) updated annontaiton: {result.AnnotationText}");
-                    return new CommentMarked
+                    foreach (var result in db.CommentsMarked.FromSql("select * from update_annotation_to_marked_comment({0}, {1}, {2})",
+                                               CommentId, UserId, Annotation))
                     {
-                        CommentId = result.CommentId,
-                        UserId = result.UserId,
-                        AnnotationText = result.AnnotationText
-                    };
+                        Console.WriteLine($"Comment id({result.CommentId}) by user({result.UserId}) updated annontaiton: {result.AnnotationText}");
+                        return new CommentMarked
+                        {
+                            CommentId = result.CommentId,
+                            UserId = result.UserId,
+                            AnnotationText = result.AnnotationText
+                        };
+                    }
                 }
             }return null;
         }
 
         //linq + if statement return boolean
-        private static void UserUnmarkComment(int CommentId, int UserId)
+        public bool UserUnmarkComment(int CommentId, int UserId)
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.CommentsMarked.FromSql("select * from user_unmark_comment({0}, {1})", CommentId, UserId))
+                var usr = db.CommentsMarked.Find(CommentId, UserId);
+                if (usr != null)
                 {
-                    Console.WriteLine($"Comment {result.CommentId}, unmarked by user: {result.UserId}");
-                }
+                    foreach (var result in db.CommentsMarked.FromSql("select * from user_unmark_comment({0}, {1})", CommentId, UserId))
+                    {
+                        Console.WriteLine($"Comment {result.CommentId}, unmarked by user: {result.UserId}");
+                        return true;
+                    }
+
+                }return false;
             }
         }
 
 
-        private static PostMarked UserMarkPost(int PostId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
+        public PostMarked UserMarkPost(int PostId, int UserId, string Annotation, bool IsQuestion) //missing something for when a comment already is marked and you try to do it again
         {
             using (var db = new DatabaseContext())
             {
-                foreach (var result in db.PostsMarked.FromSql("select * from user_mark_post({0}, {1}, {2})",
-                                                              PostId, UserId, Annotation))
+                bool DoPostExist = false;
+
+                if (IsQuestion){
+                    var question = db.Questions.Find(PostId);
+                    DoPostExist = question != null;
+                }else{
+                    var answer = db.Answers.Find(PostId);
+                    DoPostExist = answer != null;
+                }
+
+                var usr = db.Users.Find(UserId);
+                if (usr != null && DoPostExist)
                 {
-                    Console.WriteLine($"Post id({result.PostId}) by user({result.UserId}) marked with annotation: {result.AnnotationText}");
-                    return new PostMarked
+                    foreach (var result in db.PostsMarked.FromSql("select * from user_mark_post({0}, {1}, {2})",
+                              PostId, UserId, Annotation))
                     {
-                        PostId = result.PostId,
-                        UserId = result.UserId,
-                        AnnotationText = result.AnnotationText
-                    };
+                        Console.WriteLine($"Post id({result.PostId}) by user({result.UserId}) marked with annotation: {result.AnnotationText}");
+                        return new PostMarked
+                        {
+                            PostId = result.PostId,
+                            UserId = result.UserId,
+                            AnnotationText = result.AnnotationText
+                        };
+                    }
                 }
             }return null;
         }
 
-        private static PostMarked UserUpdatePost(int PostId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
+        public PostMarked UserUpdatePost(int PostId, int UserId, string Annotation) //missing something for when a comment already is marked and you try to do it again
         {
             using (var db = new DatabaseContext())
             {
@@ -198,7 +255,7 @@ namespace ProjectPortfolio2
         }
 
         //linq + if statement return boolean
-        private static void UserUnmarkPost(int PostId, int UserId) 
+        public void UserUnmarkPost(int PostId, int UserId) 
         {
             using (var db = new DatabaseContext())
             {
