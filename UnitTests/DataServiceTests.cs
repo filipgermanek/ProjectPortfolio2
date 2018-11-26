@@ -48,5 +48,26 @@ namespace UnitTests
             // cleanup
             service.DeleteUser(user.Id);
         }
+
+        [Fact]
+        public void Search_Posts_Number_Ok()
+        {
+            var service = new DataService();
+            var posts1 = service.SearchPosts("M_PI", 1);
+            //expected to return 2 questions
+            Assert.Equal(2, posts1.Count);
+
+            //expected to return 19 questions
+            var posts3 = service.SearchPosts("GCC M_PI", 1);
+            Assert.Equal(19, posts3.Count);
+        }
+
+        [Fact]
+        public void Search_Posts_Verify_Title_Ok()
+        {
+            var service = new DataService();
+            var posts = service.SearchPosts("M_PI", 1);
+            Assert.Equal("What is the fastest way to get the value of π?", posts[0].Title);
+        }
     }
 }
