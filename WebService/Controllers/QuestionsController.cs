@@ -16,6 +16,16 @@ namespace WebService.Controllers
         {
             _dataService = dataService;
         }
+
+        [HttpGet("search/{search_text}", Name = nameof(SearchPosts))]
+        public IActionResult SearchPosts(string search_text)
+        {
+            var search_results = _dataService.SearchPosts(search_text, 1);
+            if (search_results == null) return NotFound();
+            var results = search_results.Select(CreateSearchResultModel);
+            return Ok(results);
+        }
+
         //QUESTION ROUTES START
         [HttpGet(Name = nameof(GetQuestions))]
         public IActionResult GetQuestions(int page = 0, int pageSize = 5)
@@ -43,9 +53,10 @@ namespace WebService.Controllers
         {
             var post = _dataService.GetQuestionById(id);
             if (post == null) return NotFound();
-            if (post.Type == 1) {
-               // var tags = _dataService.GetTagsByQuestionId(id);
-               // post.Tags = tags;
+            if (post.Type == 1)
+            {
+                // var tags = _dataService.GetTagsByQuestionId(id);
+                // post.Tags = tags;
                 var model = CreateQuestionModel(post);
                 return Ok(model);
             }
@@ -75,8 +86,8 @@ namespace WebService.Controllers
         //QUESTION COMMENTS ROUTES END
 
         //ANSWERS ROUTES START
-        [HttpGet("{id}/answers",Name = nameof(GetAnswersByQuestionid))]
-        public IActionResult GetAnswersByQuestionid(int page, int pageSize,int id)
+        [HttpGet("{id}/answers", Name = nameof(GetAnswersByQuestionid))]
+        public IActionResult GetAnswersByQuestionid(int page, int pageSize, int id)
         {
             var answers = _dataService.GetAnswersByQuestionId(id).Select(CreateAnswerListModel);
 
@@ -191,8 +202,30 @@ namespace WebService.Controllers
                 CreationDate = question.CreationDate,
                 Answers = question.Answers?.Select(CreateAnswerListModel).ToList(),
                 Comments = question.Comments?.Select(x => CreateCommentListModel(x, true)).ToList(),
-              // Tags = question.PostTags?.Select(x => CreateTagModel(x, true)).ToList()
+                // Tags = question.PostTags?.Select(x => CreateTagModel(x, true)).ToList()
             };
+            return model;
+        }
+
+        QuestionListModel CreateQuestionListModel(SearchPostsResult question)
+        {
+            var model = new QuestionListModel
+            {
+                Title = question.Title,
+                Score = question.Score,
+                CreationDate = question.CreationDate,
+                Url = Url.Link(nameof(GetQuestionById), new { id = question.Id })
+            };
+            return model;
+        }
+
+        QuestionListModel CreateSearchResultModel(SearchPostsResult result)
+        {
+            var model = CreateQuestionListModel(result);
+            if (result.Title == null)
+            {
+                model.Url = Url.Link(nameof(GetAnswerById), new { answerId = result.Id });
+            }
             return model;
         }
 

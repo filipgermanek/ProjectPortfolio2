@@ -59,6 +59,7 @@ namespace ProjectPortfolio2
         {
 
             //for SQL Functions
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Query<SearchPostsResult>().Property(x => x.CreationDate).HasColumnName("creation_date");
             modelBuilder.Query<SearchPostsResult>().Property(x => x.ClosedDate).HasColumnName("closed_date");
             modelBuilder.Query<SearchPostsResult>().Property(x => x.ParentId).HasColumnName("parent_id");

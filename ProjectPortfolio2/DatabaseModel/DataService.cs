@@ -36,6 +36,7 @@ namespace ProjectPortfolio2.DatabaseModel
         List<CommentMarked> GetMarkedComments(int userId);
         CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string AnnotationText);
         bool UserUnmarkComment(int CommentId, int UserId);
+        List<SearchPostsResult> SearchPosts(string searchText, int userId);
     }
     public class DataService : IDataService
     {
@@ -292,22 +293,23 @@ namespace ProjectPortfolio2.DatabaseModel
         //    }return null;
         //}
 
-        public SearchPostsResult SearchPosts(string SearchString, int UserId)
+        public List<SearchPostsResult> SearchPosts(string SearchString, int UserId)
         {
             using (var db = new DatabaseContext())
             {
+                List<SearchPostsResult> results = new List<SearchPostsResult>();
                 foreach (var result in db.SearchPostsResults.FromSql("select * from search_posts({0}, {1})", SearchString, UserId))
                 {
                     Console.WriteLine($"Result: {result.Id}, {result.Title}, {result.CreationDate}");
-                    return new SearchPostsResult
+                    results.Add(new SearchPostsResult
                     {
                         Id = result.Id,
                         Title = result.Title,
                         CreationDate = result.CreationDate
-                    };
+                    });
                 }
+                return results;
             }
-            return null;
         }
     
         public CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation) 
