@@ -6676,21 +6676,21 @@
         "dependencies": {
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
-            "version": "15.7.0"
-          },
-          "xunit": {
-            "target": "Package",
-            "version": "2.3.1"
-          },
-          "xunit.runner.visualstudio": {
-            "target": "Package",
-            "version": "2.3.1"
+            "version": "[15.7.0, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.1.0",
+            "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "xunit": {
+            "target": "Package",
+            "version": "[2.3.1, )"
+          },
+          "xunit.runner.visualstudio": {
+            "target": "Package",
+            "version": "[2.3.1, )"
           }
         },
         "imports": [
