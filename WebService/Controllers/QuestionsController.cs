@@ -55,9 +55,15 @@ namespace WebService.Controllers
             if (post == null) return NotFound();
             if (post.Type == 1)
             {
-                // var tags = _dataService.GetTagsByQuestionId(id);
-                // post.Tags = tags;
                 var model = CreateQuestionModel(post);
+                var tags = _dataService.GetTagsByQuestionId(id).Select(x => CreateTagModel(x, true));
+                model.Tags = tags.ToList();
+                //TODO fixed user id for now
+                var postMarked = _dataService.GetMarkedQuestions(1).Find(x => x.PostId.Equals(id));
+                var isAnnotated = postMarked != null;
+                var annotationText = isAnnotated ? postMarked.AnnotationText : null;
+                model.IsAnnotated = isAnnotated;
+                model.AnnotationText = annotationText;
                 return Ok(model);
             }
             return NotFound();
@@ -184,7 +190,9 @@ namespace WebService.Controllers
             Console.WriteLine("url for comment list model :" + nameof(GetCommentForQuestion));
             var model = new CommentListModel
             {
-                Score = comment.Score
+                Score = comment.Score,
+                Text = comment.Text,
+                Date = comment.CreationDate,
             };
             model.Url = isQuestionModel
                 ? Url.Link(nameof(GetCommentForQuestion), new { commentId = comment.Id })
@@ -201,8 +209,7 @@ namespace WebService.Controllers
                 Body = question.Body,
                 CreationDate = question.CreationDate,
                 Answers = question.Answers?.Select(CreateAnswerListModel).ToList(),
-                Comments = question.Comments?.Select(x => CreateCommentListModel(x, true)).ToList(),
-                // Tags = question.PostTags?.Select(x => CreateTagModel(x, true)).ToList()
+                Comments = question.Comments?.Select(x => CreateCommentListModel(x, true)).ToList()
             };
             return model;
         }

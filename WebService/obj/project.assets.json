@@ -4363,7 +4363,6 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Microsoft.Extensions.Logging.Console": "2.1.1",
-          "Microsoft.NETCore.App": "2.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "2.1.2"
         },
         "compile": {
@@ -11614,13 +11613,13 @@
       "projectName": "WebService",
       "projectPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/WebService.csproj",
       "packagesPath": "/Users/filipgermanek/.nuget/packages/",
-      "outputPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj/",
+      "outputPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/WebService/obj",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/filipgermanek/.nuget/NuGet/NuGet.Config"
+        "/Users/filipgermanek/.config/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -11649,10 +11648,10 @@
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[2.1.1, )",
-            "autoReferenced": true
+            "version": "[2.1.1, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
