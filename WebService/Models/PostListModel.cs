@@ -8,5 +8,6 @@ namespace WebService.Models
         public string Title { get; set; }
         public int? Score { get; set; }
         public DateTime? CreationDate { get; set; }
+        public int? ParentId { get; set; }
     }
 }

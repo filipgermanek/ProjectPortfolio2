@@ -236,6 +236,7 @@ namespace WebService.Controllers
             var model = new QuestionListModel
             {
                 Title = result.Title,
+                ParentId = result.ParentId,
                 Id = result.Id,
                 Score = result.Score,
                 CreationDate = result.CreationDate,

@@ -49,8 +49,8 @@ namespace ProjectPortfolio2
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            //optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
-            optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
+            optionsBuilder.UseNpgsql("host=rawdata.ruc.dk;db=raw8;uid=raw8;pwd=OriPUmyf");
+            //optionsBuilder.UseNpgsql("host=localhost;db=stackoverflow;uid=filipgermanek;pwd=GRuby123");
             // you only need this if you want to see the SQL statments created by EF
             optionsBuilder.UseLoggerFactory(MyLoggerFactory)
                 .EnableSensitiveDataLogging();
