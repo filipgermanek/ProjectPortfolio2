@@ -3,6 +3,5 @@ namespace WebService.Models
 {
     public class QuestionListModel : PostListModel
     {
-
     }
 }

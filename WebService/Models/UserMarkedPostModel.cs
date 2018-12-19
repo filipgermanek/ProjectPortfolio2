@@ -3,9 +3,10 @@ namespace WebService.Models
 {
     public class UserMarkedPostModel
     {
-        int UserId { get; set; }
-        int PostId { get; set; }
+        public int UserId { get; set; }
+        public int PostId { get; set; }
         public string AnnotationText { get; set; }
-        public string Url { get; set; }
+        public string UrlToPost { get; set; }
+        public string PostTitle { get; set; }
     }
 }

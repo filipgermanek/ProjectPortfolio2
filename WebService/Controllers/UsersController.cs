@@ -66,9 +66,17 @@ namespace WebService.Controllers
         [HttpGet("{id}/marked_posts", Name = nameof(GetMarkedQuestions))]
         public IActionResult GetMarkedQuestions(int id)
         {
-            var markedQuestions = _dataService.GetMarkedQuestions(id).Select(CreateUserMarkedPostModel);
+            var markedQuestions = _dataService.GetMarkedQuestions(id).ToList();
+            List<Question> questions = _dataService.GetQuestionForIds(markedQuestions.Select(x => x.PostId).ToList());
+            List<UserMarkedPostModel> items = new List<UserMarkedPostModel>();
+            questions.ForEach(question =>
+            {
+                var postMarked = markedQuestions.Find(x => x.PostId.Equals(question.Id));
+                var item = CreateUserMarkedPostModel(question, postMarked);
+                items.Add(item);
+            });
             var result = new {
-                Items = markedQuestions
+                Items = items
             };
             return Ok(result);
         }
@@ -200,21 +208,24 @@ namespace WebService.Controllers
             return model;
         }
 
-        UserMarkedPostModel CreateUserMarkedPostModel(PostMarked postMarked)
-        {
-            var model = new UserMarkedPostModel
-            {
-                AnnotationText = postMarked.AnnotationText,
-                Url = Url.Link(nameof(QuestionsController.GetQuestionById), new { id = postMarked.PostId})
-            };
-            return model;
-        }
-
         UserMarkedCommentModel CreateUserMarkedCommentModel(CommentMarked commentMarked)
         {
             var model = new UserMarkedCommentModel
             {
                 AnnotationText = commentMarked.AnnotationText
+            };
+            return model;
+        }
+
+        UserMarkedPostModel CreateUserMarkedPostModel(Question question, PostMarked postMarked)
+        {
+            var model = new UserMarkedPostModel
+            {
+                PostTitle = question.Title,
+                PostId = postMarked.PostId, 
+                UserId = postMarked.UserId,
+                AnnotationText = postMarked.AnnotationText,
+                UrlToPost = Url.Link("GetQuestionById", new { id = postMarked.PostId })
             };
             return model;
         }

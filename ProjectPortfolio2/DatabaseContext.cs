@@ -65,6 +65,7 @@ namespace ProjectPortfolio2
             modelBuilder.Query<SearchPostsResult>().Property(x => x.ClosedDate).HasColumnName("closed_date");
             modelBuilder.Query<SearchPostsResult>().Property(x => x.ParentId).HasColumnName("parent_id");
             modelBuilder.Query<SearchPostsResult>().Property(x => x.OwnerId).HasColumnName("owner_id");
+            modelBuilder.Query<SearchPostsResult>().Property(x => x.Score).HasColumnName("score");
 
 
             base.OnModelCreating(modelBuilder);

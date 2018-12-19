@@ -1,14 +1,13 @@
 ﻿<Properties StartupConfiguration="{32E10D39-786C-4E78-BD77-E5B22A4E4ED9}|Default">
   <MonoDevelop.Ide.ItemProperties.ProjectPortfolio2 PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="WebService/Controllers/QuestionsController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../ProjectPortfolio4/Livecode10/wwwroot/js/components/postList/postListView.html">
     <Files>
-      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/person/person.js" Line="10" Column="44" />
-      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/person/personView.html" Line="28" Column="22" />
-      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/services/dataService.js" Line="21" Column="6" />
-      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/postList/postList.js" Line="1" Column="33" />
-      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/app.js" Line="33" Column="25" />
-      <File FileName="WebService/Controllers/UsersController.cs" Line="173" Column="10" />
-      <File FileName="WebService/Controllers/QuestionsController.cs" Line="92" Column="39" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/app.js" Line="46" Column="21" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/postList/postList.js" Line="20" Column="62" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/main.js" Line="102" Column="49" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/index.html" Line="33" Column="34" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/searchResults/searchResults.js" Line="3" Column="41" />
+      <File FileName="../ProjectPortfolio4/Livecode10/wwwroot/js/components/postList/postListView.html" Line="16" Column="72" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.WebService PreferredExecutionTarget="MonoDevelop.Default" />

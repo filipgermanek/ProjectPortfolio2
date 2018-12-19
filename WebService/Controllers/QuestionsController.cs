@@ -4,6 +4,7 @@ using ProjectPortfolio2.DatabaseModel;
 using System.Linq;
 using WebService.Models;
 using ProjectPortfolio2;
+using System.Collections.Generic;
 
 namespace WebService.Controllers
 {
@@ -31,7 +32,7 @@ namespace WebService.Controllers
         public IActionResult GetQuestions(int page = 0, int pageSize = 5)
         {
             var posts = _dataService.GetQuestions(page, pageSize).Select(CreateQuestionListModel);
-
+            var postIds = posts.Select(x => x.Id).ToList();
             var numberOfItems = _dataService.GetNumberOfQuestions();
             var numberOfPages = ComputeNumberOfPages(pageSize, numberOfItems);
 
@@ -187,7 +188,6 @@ namespace WebService.Controllers
 
         public CommentListModel CreateCommentListModel(Comment comment, bool isQuestionModel)
         {
-            Console.WriteLine("url for comment list model :" + nameof(GetCommentForQuestion));
             var model = new CommentListModel
             {
                 Score = comment.Score,
@@ -219,6 +219,7 @@ namespace WebService.Controllers
             var model = new QuestionListModel
             {
                 Title = question.Title,
+                Id = question.Id,
                 Score = question.Score,
                 CreationDate = question.CreationDate,
                 Url = Url.Link(nameof(GetQuestionById), new { id = question.Id })
@@ -228,11 +229,15 @@ namespace WebService.Controllers
 
         QuestionListModel CreateSearchResultModel(SearchPostsResult result)
         {
-            var model = CreateQuestionListModel(result);
-            if (result.Title == null)
+
+            var model = new QuestionListModel
             {
-                model.Url = Url.Link(nameof(GetAnswerById), new { answerId = result.Id });
-            }
+                Title = result.Title,
+                Id = result.Id,
+                Score = result.Score,
+                CreationDate = result.CreationDate,
+                Url = Url.Link(nameof(GetQuestionById), new { id = (string.IsNullOrEmpty(result.Title) ? result.ParentId : result.Id) })
+            };
             return model;
         }
 
@@ -240,6 +245,7 @@ namespace WebService.Controllers
         {
             var model = new QuestionListModel
             {
+                Id = question.Id,
                 Title = question.Title,
                 Score = question.Score,
                 CreationDate = question.CreationDate,
@@ -293,5 +299,7 @@ namespace WebService.Controllers
                 ? null
                 : CreateLink(page - 1, pageSize);
         }
+
+
     }
 }

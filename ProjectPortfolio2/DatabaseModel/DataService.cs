@@ -37,6 +37,7 @@ namespace ProjectPortfolio2.DatabaseModel
         CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string AnnotationText);
         bool UserUnmarkComment(int CommentId, int UserId);
         List<SearchPostsResult> SearchPosts(string searchText, int userId);
+        List<Question> GetQuestionForIds(List<int> ids);
     }
     public class DataService : IDataService
     {
@@ -98,6 +99,7 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 return db.Questions
+                         .OrderByDescending(x => x.Score)
                          .Skip(page * pageSize)
                          .Take(pageSize)
                          .ToList();
@@ -300,12 +302,13 @@ namespace ProjectPortfolio2.DatabaseModel
                 List<SearchPostsResult> results = new List<SearchPostsResult>();
                 foreach (var result in db.SearchPostsResults.FromSql("select * from search_posts({0}, {1})", SearchString, UserId))
                 {
-                    Console.WriteLine($"Result: {result.Id}, {result.Title}, {result.CreationDate}");
                     results.Add(new SearchPostsResult
                     {
                         Id = result.Id,
                         Title = result.Title,
-                        CreationDate = result.CreationDate
+                        CreationDate = result.CreationDate,
+                        ParentId = result.ParentId,
+                        Score = result.Score
                     });
                 }
                 return results;
@@ -445,7 +448,6 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 return db.PostsMarked.Where(x => x.UserId.Equals(userId)).ToList();
-
             }
         }
 
@@ -454,6 +456,14 @@ namespace ProjectPortfolio2.DatabaseModel
             using (var db = new DatabaseContext())
             {
                 return db.CommentsMarked.Where(x => x.UserId.Equals(userId)).ToList();
+            }
+        }
+
+        public List<Question> GetQuestionForIds(List<int> ids)
+        {
+            using (var db = new DatabaseContext())
+            {
+                return db.Questions.Where(x => ids.Contains(x.Id)).ToList();
             }
         }
 
