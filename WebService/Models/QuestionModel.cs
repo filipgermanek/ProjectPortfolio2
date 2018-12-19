@@ -5,6 +5,7 @@ namespace WebService.Models
 {
     public class QuestionModel : PostModel
     {
+        public int Id { get; set; }
         public DateTime? ClosedDate { get; set; }
         public bool IsAnnotated { get; set; }
         public String AnnotationText { get; set; }

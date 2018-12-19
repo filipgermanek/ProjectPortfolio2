@@ -404,7 +404,7 @@ namespace ProjectPortfolio2.DatabaseModel
             {
                 //check for marked post
                 var markedPost = db.PostsMarked.Find(PostId, UserId);
-                if (markedPost == null)
+                if (markedPost != null)
                 {
                     //check if post and user exists
                     var post = db.Questions.Find(PostId);
@@ -413,7 +413,6 @@ namespace ProjectPortfolio2.DatabaseModel
                     foreach (var result in db.PostsMarked.FromSql("select * from update_annotation_to_marked_post({0}, {1}, {2})",
                                                               PostId, UserId, Annotation))
                     {
-                        Console.WriteLine($"Post id({result.PostId}) by user({result.UserId}) updated annotation: {result.AnnotationText}");
                         return new PostMarked
                         {
                             PostId = result.PostId,

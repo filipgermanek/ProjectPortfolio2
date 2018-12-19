@@ -66,6 +66,7 @@ namespace WebService.Controllers
         [HttpGet("{id}/marked_posts", Name = nameof(GetMarkedQuestions))]
         public IActionResult GetMarkedQuestions(int id)
         {
+
             var markedQuestions = _dataService.GetMarkedQuestions(id).ToList();
             List<Question> questions = _dataService.GetQuestionForIds(markedQuestions.Select(x => x.PostId).ToList());
             List<UserMarkedPostModel> items = new List<UserMarkedPostModel>();

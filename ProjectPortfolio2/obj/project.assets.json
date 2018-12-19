@@ -3178,13 +3178,13 @@
       "projectName": "ProjectPortfolio2",
       "projectPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/ProjectPortfolio2.csproj",
       "packagesPath": "/Users/filipgermanek/.nuget/packages/",
-      "outputPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj",
+      "outputPath": "/Users/filipgermanek/Desktop/ProjectPortfolio2/ProjectPortfolio2/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/filipgermanek/.config/NuGet/NuGet.Config"
+        "/Users/filipgermanek/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -3211,7 +3211,6 @@
             "version": "[2.1.1, )"
           },
           "Microsoft.NETCore.App": {
-            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true

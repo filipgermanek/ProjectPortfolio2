@@ -59,6 +59,8 @@ namespace WebService.Controllers
                 var model = CreateQuestionModel(post);
                 var tags = _dataService.GetTagsByQuestionId(id).Select(x => CreateTagModel(x, true));
                 model.Tags = tags.ToList();
+                var answers = _dataService.GetAnswersByQuestionId(id).Select(CreateAnswerListModel).ToList();
+                model.Answers = answers;
                 //TODO fixed user id for now
                 var postMarked = _dataService.GetMarkedQuestions(1).Find(x => x.PostId.Equals(id));
                 var isAnnotated = postMarked != null;
@@ -204,6 +206,7 @@ namespace WebService.Controllers
         {
             var model = new QuestionModel
             {
+                Id = question.Id,
                 Title = question.Title,
                 Score = question.Score,
                 Body = question.Body,
@@ -259,6 +262,8 @@ namespace WebService.Controllers
             var model = new AnswerListModel
             {
                 Score = answer.Score,
+                Body = answer.Body,
+                Accepted = answer.Accepted,
                 CreationDate = answer.CreationDate,
                 Url = Url.Link(nameof(GetAnswerById), new { answerId = answer.Id })
             };
