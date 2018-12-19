@@ -27,6 +27,15 @@ namespace WebService.Controllers
             return Ok(results);
         }
 
+        [HttpGet("{id}/words_count", Name = nameof(GetWordCountForPost))]
+        public IActionResult GetWordCountForPost(int id)
+        {
+            var words_count = _dataService.GetWordsCountInPost(id);
+            if (words_count == null) return NotFound();
+            var results = words_count.ToList();
+            return Ok(results);
+        }
+
         //QUESTION ROUTES START
         [HttpGet(Name = nameof(GetQuestions))]
         public IActionResult GetQuestions(int page = 0, int pageSize = 5)

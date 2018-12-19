@@ -37,6 +37,7 @@ namespace ProjectPortfolio2.DatabaseModel
         CommentMarked UserUpdateCommentAnnotation(int CommentId, int UserId, string AnnotationText);
         bool UserUnmarkComment(int CommentId, int UserId);
         List<SearchPostsResult> SearchPosts(string searchText, int userId);
+        List<WordCountInPost> GetWordsCountInPost(int postId);
         List<Question> GetQuestionForIds(List<int> ids);
     }
     public class DataService : IDataService
@@ -314,7 +315,26 @@ namespace ProjectPortfolio2.DatabaseModel
                 return results;
             }
         }
-    
+
+        public List<WordCountInPost> GetWordsCountInPost(int PostId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                List<WordCountInPost> results = new List<WordCountInPost>();
+                foreach (var result in db.WordsCountInPostResults.FromSql("select * from get_word_Count_in_post({0})", PostId))
+                {
+                    results.Add(new WordCountInPost
+                    {
+                        Id = result.Id,
+                        Word = result.Word,
+                        Count = result.Count
+                    });
+                }
+                return results;
+            }
+        }
+
+
         public CommentMarked UserMarkComment(int CommentId, int UserId, string Annotation) 
         {
             using (var db = new DatabaseContext())

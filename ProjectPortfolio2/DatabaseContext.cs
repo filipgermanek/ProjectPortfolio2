@@ -28,10 +28,18 @@ namespace ProjectPortfolio2
         public int OwnerId { get; set; }
     }
 
+    public class WordCountInPost
+    {
+        public int Id { get; set; }
+        public string Word { get; set; }
+        public int Count { get; set; }
+    }
+
     public class DatabaseContext : DbContext
     {
         //for sql functions
         public DbQuery<SearchPostsResult> SearchPostsResults { get; set; }
+        public DbQuery<WordCountInPost> WordsCountInPostResults { get; set; }
 
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Comment> Comments {get; set; }
